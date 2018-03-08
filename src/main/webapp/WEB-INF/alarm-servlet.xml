@@ -17,7 +17,7 @@
         http://www.springframework.org/schema/aop/spring-aop.xsd">  
   
   	<!-- 开启自动扫包 -->
-    <context:component-scan base-package="com.alarm.cms" />
+    <context:component-scan base-package="com.alarm.cms,com.alarm.dao,com.alarm.service" />
     
     <!-- 文件上传 -->
     <!-- <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" /> -->
@@ -60,7 +60,8 @@
             </props>
         </property>
         <!-- 扫描并加载注解过的实体类 -->
-        <property name="packagesToScan" value="org.ssh.*.model"/>
+        <property name="packagesToScan" value="com.alarm.*"/>
+        <property name="mappingLocations" value="classpath:com/alarm/mapping/*.hbm.xml"></property>
     </bean>
      
     <!-- 配置事务管理器 -->

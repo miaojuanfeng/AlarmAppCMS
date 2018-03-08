@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+    
+<hibernate-mapping>
+<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+
+<class 
+    name="com.alarm.model.EaUser" 
+    table="ea_user"
+>
+
+    <id
+        name="id"
+        type="java.lang.Integer"
+        column="id"
+    >
+        <generator class="assigned" />
+    </id>
+
+    <property
+        name="username"
+        type="java.lang.String"
+        column="username"
+        not-null="true"
+        length="255"
+    />
+    <property
+        name="number"
+        type="int"
+        column="number"
+        not-null="true"
+        length="10"
+    />
+    <property
+        name="nickname"
+        type="java.lang.String"
+        column="nickname"
+        not-null="true"
+        length="255"
+    />
+    <property
+        name="profileImage"
+        type="java.lang.String"
+        column="profile_image"
+        not-null="true"
+        length="255"
+    />
+    <property
+        name="platform"
+        type="java.lang.String"
+        column="platform"
+        not-null="true"
+        length="9"
+    />
+    <property
+        name="accepted"
+        type="java.lang.String"
+        column="accepted"
+        not-null="true"
+        length="1"
+    />
+    <property
+        name="createDate"
+        type="java.sql.Timestamp"
+        column="create_date"
+        not-null="true"
+        length="19"
+    />
+    <property
+        name="modifyDate"
+        type="java.sql.Timestamp"
+        column="modify_date"
+        not-null="true"
+        length="19"
+    />
+    <property
+        name="deleted"
+        type="int"
+        column="deleted"
+        not-null="true"
+        length="10"
+    />
+
+    <!-- Associations -->
+  
+
+</class>
+</hibernate-mapping>
