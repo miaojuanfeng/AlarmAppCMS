@@ -15,7 +15,7 @@
 										<h1>Exercise <small>Alarm</small></h1>
 									</div>
 									<div class="pull-right">
-										<i class="glyphicon glyphicon-user corpcolor-font"></i> <?=ucfirst(get_user($this->session->userdata('user_id'))->user_name)?> (<a href="<?=base_url('login')?>">Logout</a>)
+										<i class="glyphicon glyphicon-user corpcolor-font"></i> ${user_nickname} (<a href="<c:url value="/cms/user/logout"></c:url>">Logout</a>)
 									</div>
 								</div>
 
@@ -50,11 +50,11 @@
 												<li>
 													<a href="<?=base_url('z_stock_product')?>">Warehouse</a>
 												</li>
-												<li class="active">
-													<a href="<?=base_url('maintenance')?>">Maint.</a>
+												<li>
+													<a href="<c:url value="/cms/user/select"></c:url>">User</a>
 												</li>
-												<li class="active">
-													<a href="<?=base_url('report')?>">Report</a>
+												<li>
+													<a href="<c:url value="/cms/config/update"></c:url>">Config</a>
 												</li>
 											</ul>
 										</div>

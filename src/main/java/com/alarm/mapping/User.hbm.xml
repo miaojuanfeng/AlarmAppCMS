@@ -12,8 +12,8 @@
 -->
 
 <class 
-    name="com.alarm.model.EaUser" 
-    table="ea_user"
+    name="com.alarm.model.User" 
+    table="user"
 >
 
     <id
@@ -46,25 +46,11 @@
         length="255"
     />
     <property
-        name="profileImage"
-        type="java.lang.String"
-        column="profile_image"
-        not-null="true"
-        length="255"
-    />
-    <property
         name="platform"
         type="java.lang.String"
         column="platform"
         not-null="true"
-        length="9"
-    />
-    <property
-        name="accepted"
-        type="java.lang.String"
-        column="accepted"
-        not-null="true"
-        length="1"
+        length="7"
     />
     <property
         name="createDate"

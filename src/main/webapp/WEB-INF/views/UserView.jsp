@@ -1,0 +1,367 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Product preset</title>
+
+		<%@ include file="inc/MetaArea.jsp" %>
+
+		<script>
+		$(function(){
+			$('input[name="product_id"]').focus();
+
+			/* pagination */
+			$('.pagination-area>a, .pagination-area>strong').addClass('btn btn-sm btn-primary');
+			$('.pagination-area>strong').addClass('disabled');
+		});
+
+		function check_delete(id){
+			var answer = prompt("Confirm delete?");
+			if(answer){
+				$('input[name="product_id"]').val(id);
+				$('input[name="product_delete_reason"]').val(encodeURI(answer));
+				$('form[name="list"]').submit();
+			}else{
+				return false;
+			}
+		}
+
+		function login_as(id){
+			$('input[name="product_id"]').val(id);
+			$('input[name="act"]').val('login_as');
+			$('form[name="list"]').submit();
+		}
+		</script>
+	</head>
+
+	<body>
+
+		<%@ include file="inc/HeaderArea.jsp" %>
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<c:if test="${method == 'insert' || method == 'update'}">
+		<div class="content-area">
+
+			<div class="container-fluid">
+				<div class="row">
+
+					<h2 class="col-sm-12"><a href="<c:url value="/cms/${classLower}/select"></c:url>">${classUpper} management</a> > ${method} ${classLower}</h2>
+
+					<div class="col-sm-12">
+						<form:form name="update" method="post" modelAttribute="user">
+							<input type="hidden" name="product_id" value="${user.id}" />
+							<input type="hidden" name="referrer" value="${referer}" />
+							<div class="fieldset">
+								<div class="row">
+									
+									<div class="col-sm-4 col-xs-12 pull-right">
+										<blockquote>
+											<h4 class="corpcolor-font">Instructions</h4>
+											<p><span class="highlight">*</span> is a required field</p>
+										</blockquote>
+									</div>
+									<div class="col-sm-4 col-xs-12">
+										<h4 class="corpcolor-font">Basic information</h4>
+										<p class="form-group">
+											<label for="username">Username <span class="highlight">*</span></label>
+											<form:input id="username" path="username" type="text" class="form-control input-sm required" placeholder="Username" />
+										</p>
+										<div class="form-group">
+											<label for="number">Number <span class="highlight">*</span></label>
+											<form:input id="number" path="number" type="text" class="form-control input-sm required" placeholder="Number" />
+										</div>
+										<div class="form-group">
+											<label for="nickname">Nickname <span class="highlight">*</span></label>
+											<form:input id="nickname" path="nickname" type="text" class="form-control input-sm required" placeholder="Nickname" />
+										</div>
+									</div>
+									<div class="col-sm-4 col-xs-12">
+
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-xs-12">
+										<button type="submit" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-floppy-disk"></i> Save</button>
+									</div>
+								</div>
+
+							</div>
+						</form:form>
+					</div>
+
+				</div>
+			</div>
+
+
+
+
+		</div>
+		</c:if>
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<c:if test="${method == 'select'}">
+		<div class="content-area">
+
+			<div class="container-fluid">
+				<div class="row">
+
+					<h2 class="col-sm-12">${classUpper} management</h2>
+
+					<div class="content-column-area col-md-12 col-sm-12">
+
+						<%-- <div class="fieldset">
+							<div class="search-area">
+
+								<form product="form" method="get">
+									<input type="hidden" name="product_id" />
+									<table>
+										<tbody>
+											<tr>
+												<td width="90%">
+													<div class="row">
+														<div class="col-sm-2"><h6>Search</h6></div>
+														<div class="col-sm-2">
+															<input type="text" name="product_id" class="form-control input-sm" placeholder="#" value="" />
+														</div>
+														<div class="col-sm-2">
+															<input type="text" name="product_code_like" class="form-control input-sm" placeholder="Product code" value="" />
+														</div>
+														<div class="col-sm-2">
+															<input type="text" name="product_name_like" class="form-control input-sm" placeholder="Product name" value="" />
+														</div>
+														<div class="col-sm-2"></div>
+														<div class="col-sm-2"></div>
+														<div class="col-sm-2"></div>
+													</div>
+												</td>
+												<td valign="top" width="10%" class="text-right">
+													<button type="submit" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Search">
+														<i class="glyphicon glyphicon-search"></i>
+													</button>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</form>
+
+							</div> <!-- list-container -->
+						</div> --%>
+						<div class="fieldset">
+							
+							<div class="list-area">
+								<form name="list" action="<?=base_url('product/delete')?>" method="post">
+									<input type="hidden" name="product_id" />
+									<input type="hidden" name="product_delete_reason" />
+									<%@ include file="inc/PageArea.jsp" %>
+									<table id="product" class="table table-striped table-bordered">
+										<thead>
+											<tr>
+												<th>#</th>
+												<th>
+													<a href="<?=get_order_link('product_code')?>">
+														Username <i class="glyphicon glyphicon-sort corpcolor-font"></i>
+													</a>
+												</th>
+												<th>
+													<a href="<?=get_order_link('product_name')?>">
+														Number <i class="glyphicon glyphicon-sort corpcolor-font"></i>
+													</a>
+												</th>
+												<th>
+													<a href="<?=get_order_link('product_name')?>">
+														Nickname <i class="glyphicon glyphicon-sort corpcolor-font"></i>
+													</a>
+												</th>
+												<th>
+													<a href="<?=get_order_link('product_modify')?>">
+														Create <i class="glyphicon glyphicon-sort corpcolor-font"></i>
+													</a>
+												</th>
+												<th>
+													<a href="<?=get_order_link('product_modify')?>">
+														Modify <i class="glyphicon glyphicon-sort corpcolor-font"></i>
+													</a>
+												</th>
+												<th width="40"></th>
+												<th width="40" class="text-right">
+													<a href="<c:url value="/cms/user/insert"></c:url>" data-toggle="tooltip" title="Insert">
+														<i class="glyphicon glyphicon-plus"></i>
+													</a>
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach items="${user}" var="item">
+											<tr>
+												<td title="${item.id}">${item.id}</td>
+												<td>${item.username}</td>
+												<td>${item.number}</td>
+												<td>${item.nickname}</td>
+												<td><fmt:formatDate  value="${item.createDate}"  pattern="yyyy-MM-dd HH:mm:ss" /></td>
+												<td><fmt:formatDate  value="${item.modifyDate}"  pattern="yyyy-MM-dd HH:mm:ss" /></td>
+												<td class="text-right">
+													<a href="<c:url value="/cms/user/update/${item.id}"></c:url>" data-toggle="tooltip" title="Update">
+														<i class="glyphicon glyphicon-edit"></i>
+													</a>
+												</td>
+												<td class="text-right">
+													<a onclick="check_delete(${item.id});" class="" data-toggle="tooltip" title="Delete">
+														<i class="glyphicon glyphicon-remove"></i>
+													</a>
+												</td>
+											</tr>
+											</c:forEach>
+											
+											<c:if test="${totalRecord == 0}">
+											<tr class="list-row">
+												<td colspan="10"><a href="#" class="btn btn-sm btn-primary">No record found</a></td>
+											</tr>
+											</c:if>
+											
+										</tbody>
+									</table>
+									<%@ include file="inc/PageArea.jsp" %>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		</c:if>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<%@ include file="inc/FooterArea.jsp" %>
+
+	</body>
+</html>

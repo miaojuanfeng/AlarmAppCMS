@@ -1,18 +1,18 @@
 package com.alarm.cms;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.alarm.service.EaUserService;
+import com.alarm.model.User;
 
 @Controller
 public class DashboardCtrl {
-	
-	@Autowired
-	private EaUserService eaUserService;
 	
 	/*
 	 * 主页跳转
@@ -20,15 +20,35 @@ public class DashboardCtrl {
 	@RequestMapping(value="/cms", method=RequestMethod.GET)
 	public String index(@ModelAttribute("redirect") String redirect){
 		
+		if( redirect != null ){
+			return redirect;
+		}
+		
 		return "redirect:/cms/dashboard/select";
 	}
 	
 	@RequestMapping(value="/cms/dashboard/select", method=RequestMethod.GET)
 	public String select(@ModelAttribute("redirect") String redirect){
 		
-		String username = eaUserService.selectByPrimaryKey(22);
-		System.out.println(username);
+		if( redirect != null ){
+			return redirect;
+		}
 		
 		return "DashboardView";
+	}
+	
+	@ModelAttribute
+	public void startup(Model model, HttpSession httpSession, HttpServletRequest request){
+		//判断是否登录
+		User user = (User)httpSession.getAttribute("user");
+		if( user == null ){
+			model.addAttribute("redirect", "redirect:/cms/user/login");
+			return;
+		}else{
+			model.addAttribute("redirect", null);
+		}
+		
+		//当前登录用户名
+		model.addAttribute("user_nickname", user.getNickname());
 	}
 }

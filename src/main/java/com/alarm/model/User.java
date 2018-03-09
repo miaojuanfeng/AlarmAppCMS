@@ -2,7 +2,7 @@ package com.alarm.model;
 
 import java.util.Date;
 
-public class EaUser {
+public class User {
     private Integer id;
 
     private String username;
@@ -10,12 +10,8 @@ public class EaUser {
     private Integer number;
 
     private String nickname;
-    
-    private String profileImage;
 
     private String platform;
-    
-    private String accepted;
 
     private Date createDate;
 
@@ -54,14 +50,6 @@ public class EaUser {
     public void setNickname(String nickname) {
         this.nickname = nickname == null ? null : nickname.trim();
     }
-    
-    public String getProfileImage() {
-        return profileImage;
-    }
-
-    public void setProfileImage(String profileImage) {
-        this.profileImage = profileImage == null ? null : profileImage.trim();
-    }
 
     public String getPlatform() {
         return platform;
@@ -69,14 +57,6 @@ public class EaUser {
 
     public void setPlatform(String platform) {
         this.platform = platform == null ? null : platform.trim();
-    }
-    
-    public String getAccepted() {
-        return accepted;
-    }
-
-    public void setAccepted(String accepted) {
-        this.accepted = accepted == null ? null : accepted.trim();
     }
 
     public Date getCreateDate() {

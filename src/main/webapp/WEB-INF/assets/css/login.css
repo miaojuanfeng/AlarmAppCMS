@@ -24,7 +24,7 @@
 	background-color: #fff;
 }
 .login-area .fieldset {
-	height: 200px;
+	height: 150px;
 }
 .login-area .fieldset.right {
 	background-color: #3d0742;
@@ -37,6 +37,12 @@
 	margin-top: 15px;
 	margin-bottom: 15px;
 	text-align: center;
+}
+.login-area div.error{
+	margin-bottom:20px;padding:0 15px;text-align:center;background: whitesmoke;font-size: 14px;
+}
+.login-area label.error{
+	display:none !important;
 }
 
 @media (max-width: 991px) {
