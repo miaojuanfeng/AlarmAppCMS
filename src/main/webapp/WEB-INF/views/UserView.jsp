@@ -19,10 +19,9 @@
 		});
 
 		function check_delete(id){
-			var answer = prompt("Confirm delete?");
+			var answer = confirm("Confirm delete?");
 			if(answer){
-				$('input[name="product_id"]').val(id);
-				$('input[name="product_delete_reason"]').val(encodeURI(answer));
+				$('input[name="user_id"]').val(id);
 				$('form[name="list"]').submit();
 			}else{
 				return false;
@@ -236,36 +235,79 @@
 						<div class="fieldset">
 							
 							<div class="list-area">
-								<form name="list" action="<?=base_url('product/delete')?>" method="post">
-									<input type="hidden" name="product_id" />
-									<input type="hidden" name="product_delete_reason" />
+								<form name="list" action="<c:url value="/cms/user/delete"></c:url>" method="post">
+									<input type="hidden" name="user_id" />
 									<%@ include file="inc/PageArea.jsp" %>
 									<table id="product" class="table table-striped table-bordered">
 										<thead>
 											<tr>
 												<th>#</th>
 												<th>
-													<a href="<?=get_order_link('product_code')?>">
+													<a href="
+														<c:choose>
+															<c:when test="${order == 'username' && ascend == 'asc'}">
+																<c:url value="/cms/user/select/order/username/ascend/desc/1"></c:url>
+															</c:when>
+															<c:otherwise>
+																<c:url value="/cms/user/select/order/username/ascend/asc/1"></c:url>
+															</c:otherwise>
+														</c:choose>
+													">
 														Username <i class="glyphicon glyphicon-sort corpcolor-font"></i>
 													</a>
 												</th>
 												<th>
-													<a href="<?=get_order_link('product_name')?>">
+													<a href="
+														<c:choose>
+															<c:when test="${order == 'number' && ascend == 'asc'}">
+																<c:url value="/cms/user/select/order/number/ascend/desc/1"></c:url>
+															</c:when>
+															<c:otherwise>
+																<c:url value="/cms/user/select/order/number/ascend/asc/1"></c:url>
+															</c:otherwise>
+														</c:choose>
+													">
 														Number <i class="glyphicon glyphicon-sort corpcolor-font"></i>
 													</a>
 												</th>
 												<th>
-													<a href="<?=get_order_link('product_name')?>">
+													<a href="
+														<c:choose>
+															<c:when test="${order == 'nickname' && ascend == 'asc'}">
+																<c:url value="/cms/user/select/order/nickname/ascend/desc/1"></c:url>
+															</c:when>
+															<c:otherwise>
+																<c:url value="/cms/user/select/order/nickname/ascend/asc/1"></c:url>
+															</c:otherwise>
+														</c:choose>">
 														Nickname <i class="glyphicon glyphicon-sort corpcolor-font"></i>
 													</a>
 												</th>
 												<th>
-													<a href="<?=get_order_link('product_modify')?>">
+													<a href="
+														<c:choose>
+															<c:when test="${order == 'create_date' && ascend == 'asc'}">
+																<c:url value="/cms/user/select/order/create_date/ascend/desc/1"></c:url>
+															</c:when>
+															<c:otherwise>
+																<c:url value="/cms/user/select/order/create_date/ascend/asc/1"></c:url>
+															</c:otherwise>
+														</c:choose>
+													">
 														Create <i class="glyphicon glyphicon-sort corpcolor-font"></i>
 													</a>
 												</th>
 												<th>
-													<a href="<?=get_order_link('product_modify')?>">
+													<a href="
+														<c:choose>
+															<c:when test="${order == 'modify_date' && ascend == 'asc'}">
+																<c:url value="/cms/user/select/order/modify_date/ascend/desc/1"></c:url>
+															</c:when>
+															<c:otherwise>
+																<c:url value="/cms/user/select/order/modify_date/ascend/asc/1"></c:url>
+															</c:otherwise>
+														</c:choose>
+														">
 														Modify <i class="glyphicon glyphicon-sort corpcolor-font"></i>
 													</a>
 												</th>

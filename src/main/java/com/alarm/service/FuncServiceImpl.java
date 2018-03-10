@@ -45,8 +45,17 @@ public class FuncServiceImpl implements FuncService {
 		model.addAttribute("classLower", ctrl);
 		
 		//解析出方法名称
-		String method = urlArr[cmsIndex+2];
-		model.addAttribute("method", method);
+		model.addAttribute("method", urlArr[cmsIndex+2]);
+		
+		//解析出排序名称和顺序
+		int orderIndex = this.getItemIndexOfArray(urlArr, "order");
+		if( orderIndex > -1 ){
+			model.addAttribute("order", urlArr[orderIndex+1]);
+		}
+		int ascendIndex = this.getItemIndexOfArray(urlArr, "ascend");
+		if( ascendIndex > -1 ){
+			model.addAttribute("ascend", urlArr[ascendIndex+1]);
+		}
 		
 		//当前登录用户名
 		model.addAttribute("user_nickname", user.getNickname());
@@ -54,5 +63,4 @@ public class FuncServiceImpl implements FuncService {
 		//返回的url地址
 		model.addAttribute("referer", request.getHeader("referer"));
 	}
-
 }

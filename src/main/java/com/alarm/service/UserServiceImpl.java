@@ -1,5 +1,6 @@
 package com.alarm.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,24 @@ public class UserServiceImpl implements UserService {
 
 	public int updateByPrimaryKey(User user) {
 		// TODO Auto-generated method stub
+		user.setModifyDate(new Date());
 		return userDao.updateByPrimaryKey(user);
+	}
+
+	public int insert(User user) {
+		// TODO Auto-generated method stub
+		user.setPlatform("ios");
+		Date date = new Date();
+		user.setCreateDate(date);
+		user.setModifyDate(date);
+		user.setDeleted(0);
+		return userDao.insert(user);
+	}
+
+	public int deleteByPrimaryKey(User user) {
+		// TODO Auto-generated method stub
+		user.setModifyDate(new Date());
+		return userDao.deleteByPrimaryKey(user);
 	}
 
 }

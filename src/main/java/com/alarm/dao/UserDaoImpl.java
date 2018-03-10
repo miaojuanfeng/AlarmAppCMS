@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -61,7 +62,25 @@ public class UserDaoImpl implements UserDao {
 
 	public int updateByPrimaryKey(User user) {
 		// TODO Auto-generated method stub
-		String hql="update User set username=:username, number=:number, nickname=:nickname where deleted=0 and id=:id";
+		String hql="update User set username=:username, number=:number, nickname=:nickname, modify_date=:modifyDate where deleted=0 and id=:id";
+		Query query = getSession().createQuery(hql);
+		query.setProperties(user);
+        return query.executeUpdate();
+	}
+
+	public int insert(User user) {
+		// TODO Auto-generated method stub
+		Session session = getSession();
+        Transaction tran = session.beginTransaction();
+        session.save(user);    //执行
+        tran.commit();  //提交
+        session.close();
+        return 1;
+	}
+
+	public int deleteByPrimaryKey(User user) {
+		// TODO Auto-generated method stub
+		String hql="update User set deleted=1, modify_date=:modifyDate where deleted=0 and id=:id";
 		Query query = getSession().createQuery(hql);
 		query.setProperties(user);
         return query.executeUpdate();

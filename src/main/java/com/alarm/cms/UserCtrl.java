@@ -112,6 +112,14 @@ public class UserCtrl {
 		return "redirect:/cms/user/select/1";
 	}
 	
+	@RequestMapping(value="/select/order/{orderBy}/ascend/{ascend}", method=RequestMethod.GET)
+	public String selectAll(
+			@PathVariable(value="orderBy") String orderBy,
+			@PathVariable(value="ascend") String ascend
+	){
+		return "redirect:/cms/user/select/order/"+orderBy+"/ascend/"+ascend+"/1";
+	}
+	
 	@RequestMapping(value="/select/{page}", method=RequestMethod.GET)
 	public String selectAll(
 			Model model,  
@@ -122,7 +130,59 @@ public class UserCtrl {
 			return redirect;
 		}
 		
-		pager(model, page);
+		pager(model, page, "id", "desc");
+		
+		return "UserView";
+	}
+	
+	@RequestMapping(value="/select/order/{orderBy}/ascend/{ascend}/{page}", method=RequestMethod.GET)
+	public String selectAll(
+			Model model,  
+			@PathVariable(value="orderBy") String orderBy,
+			@PathVariable(value="ascend") String ascend,
+			@PathVariable(value="page") Integer page,
+			@ModelAttribute("redirect") String redirect
+	){
+		if( redirect != null ){
+			return redirect;
+		}
+		
+		pager(model, page, orderBy, ascend);
+		
+		return "UserView";
+	}
+	
+	@RequestMapping(value="/insert", method=RequestMethod.GET)
+	public String insert(
+			Model model,
+			@ModelAttribute("redirect") String redirect
+	){
+		if( redirect != null ){
+			return redirect;
+		}
+		
+		model.addAttribute("user", new User());
+
+		return "UserView";
+	}
+	
+	@RequestMapping(value="/insert", method=RequestMethod.POST)
+	public String insert(
+			Model model, 
+			@ModelAttribute("user") User user, 
+			@RequestParam("referrer") String referrer,
+			@ModelAttribute("redirect") String redirect
+	){
+		if( redirect != null ){
+			return redirect;
+		}
+		
+		if( userService.insert(user) == 1 ){
+			if( referrer != "" ){
+				return "redirect:"+referrer.substring(referrer.lastIndexOf("/cms/"));
+			}
+			return "redirect:/cms/user/select";
+		}
 		
 		return "UserView";
 	}
@@ -170,7 +230,26 @@ public class UserCtrl {
 		return "UserView";
 	}
 	
-	private void pager(Model model, Integer page){
+	@RequestMapping(value="/delete", method=RequestMethod.POST)
+	public String delete(
+			Model model, 
+			@RequestParam("user_id") Integer user_id,
+			@ModelAttribute("redirect") String redirect
+	){
+		if( redirect != null ){
+			return redirect;
+		}
+		
+		User user = userService.selectByPrimaryKey(user_id);
+		if( user != null ){
+			user.setDeleted(1);
+			userService.deleteByPrimaryKey(user);
+		}
+		
+		return "redirect:/cms/user/select";
+	}
+	
+	private void pager(Model model, Integer page, String orderBy, String ascend){
 		int pageSize = 20;
 		long totalRecord = 0;
 		totalRecord = userService.selectCount();
@@ -182,7 +261,7 @@ public class UserCtrl {
 		
 		Integer offset = (page-1)*pageSize;
 		List<User> user = null;
-		user = userService.selectAll("id", "desc", offset, pageSize);
+		user = userService.selectAll(orderBy, ascend, offset, pageSize);
 		
 		model.addAttribute("page", page);
 		model.addAttribute("totalPage", totalPage);
