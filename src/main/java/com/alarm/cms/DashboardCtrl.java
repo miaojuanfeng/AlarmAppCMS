@@ -3,6 +3,7 @@ package com.alarm.cms;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -10,10 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.alarm.model.User;
+import com.alarm.service.FuncService;
 
 @Controller
 public class DashboardCtrl {
 	
+	@Autowired
+	private FuncService funcService;
 	/*
 	 * 主页跳转
 	 */
@@ -39,16 +43,6 @@ public class DashboardCtrl {
 	
 	@ModelAttribute
 	public void startup(Model model, HttpSession httpSession, HttpServletRequest request){
-		//判断是否登录
-		User user = (User)httpSession.getAttribute("user");
-		if( user == null ){
-			model.addAttribute("redirect", "redirect:/cms/user/login");
-			return;
-		}else{
-			model.addAttribute("redirect", null);
-		}
-		
-		//当前登录用户名
-		model.addAttribute("user_nickname", user.getNickname());
+		funcService.modelAttribute(model, httpSession, request);
 	}
 }

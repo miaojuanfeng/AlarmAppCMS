@@ -1,6 +1,7 @@
 package com.alarm.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,29 @@ public class CommentServiceImpl implements CommentService{
 		comment.setModifyDate(date);
 		comment.setDeleted(0);
 		return commentDao.insert(comment);
+	}
+
+	public int updateByPrimaryKey(Comment comment) {
+		// TODO Auto-generated method stub
+		comment.setModifyDate(new Date());
+		return commentDao.updateByPrimaryKey(comment);
+	}
+
+	public int deleteByPrimaryKey(Comment comment) {
+		// TODO Auto-generated method stub
+		comment.setModifyDate(new Date());
+		comment.setDeleted(1);
+		return commentDao.deleteByPrimaryKey(comment);
+	}
+
+	public Long selectCount() {
+		// TODO Auto-generated method stub
+		return commentDao.selectCount();
+	}
+
+	public List<Comment> selectAll(String orderBy, String ascend, int offset, int pageSize) {
+		// TODO Auto-generated method stub
+		return commentDao.selectAll(orderBy, ascend, offset, pageSize);
 	}
 	
 }

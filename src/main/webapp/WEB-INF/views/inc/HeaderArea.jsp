@@ -34,26 +34,26 @@
 											<button type="button" class="btn btn-primary navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
 												&nbsp;<i class="glyphicon glyphicon-th"></i>&nbsp;
 											</button>
-											<div class="navbar-brand hidden-lg hidden-md hidden-sm">Eyepopper <small style="font-size:12px;">ERP</small></div>
+											<div class="navbar-brand hidden-lg hidden-md hidden-sm">Exercise <small style="font-size:12px;">Alarm</small></div>
 										</div>
 										<div id="navbar" class="navbar-collapse collapse" aria-expanded="false">
 											<ul class="nav navbar-nav">
-												<li class="active">
-													<a href="<?=base_url('dashboard')?>">Dashboard</a>
+												<li <c:if test="${classLower=='dashboard'}">class="active"</c:if>>
+													<a href="<c:url value="/cms/dashboard/select"></c:url>">Dashboard</a>
 												</li>
-												<li>
-													<a href="<?=base_url('product')?>">Product</a>
+												<li <c:if test="${classLower=='discuss'}">class="active"</c:if>>
+													<a href="<c:url value="/cms/discuss/select"></c:url>">Discuss</a>
 												</li>
-												<li>
-													<a href="<?=base_url('booking')?>">Booking</a>
+												<li <c:if test="${classLower=='expert'}">class="active"</c:if>>
+													<a href="<c:url value="/cms/expert/select"></c:url>">Expert</a>
 												</li>
-												<li>
-													<a href="<?=base_url('z_stock_product')?>">Warehouse</a>
+												<li <c:if test="${classLower=='comment'}">class="active"</c:if>>
+													<a href="<c:url value="/cms/comment/select"></c:url>">Comment</a>
 												</li>
-												<li>
+												<li <c:if test="${classLower=='user'}">class="active"</c:if>>
 													<a href="<c:url value="/cms/user/select"></c:url>">User</a>
 												</li>
-												<li>
+												<li <c:if test="${classLower=='config'}">class="active"</c:if>>
 													<a href="<c:url value="/cms/config/update"></c:url>">Config</a>
 												</li>
 											</ul>

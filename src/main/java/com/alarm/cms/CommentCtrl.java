@@ -16,12 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.alarm.model.Comment;
-import com.alarm.model.User;
-import com.alarm.service.CommentService;
 import com.alarm.service.FuncService;
-import com.alarm.service.UserService;
-
-import net.sf.json.JSONObject;
+import com.alarm.service.CommentService;
 
 @Controller
 @RequestMapping("cms/comment")
@@ -35,7 +31,7 @@ public class CommentCtrl {
 	
 	@RequestMapping(value="/select", method=RequestMethod.GET)
 	public String selectAll(){
-		return "redirect:/cms/user/select/1";
+		return "redirect:/cms/comment/select/1";
 	}
 	
 	@RequestMapping(value="/select/order/{orderBy}/ascend/{ascend}", method=RequestMethod.GET)
@@ -43,7 +39,7 @@ public class CommentCtrl {
 			@PathVariable(value="orderBy") String orderBy,
 			@PathVariable(value="ascend") String ascend
 	){
-		return "redirect:/cms/user/select/order/"+orderBy+"/ascend/"+ascend+"/1";
+		return "redirect:/cms/comment/select/order/"+orderBy+"/ascend/"+ascend+"/1";
 	}
 	
 	@RequestMapping(value="/select/{page}", method=RequestMethod.GET)
@@ -56,16 +52,9 @@ public class CommentCtrl {
 			return redirect;
 		}
 		
-		Comment comment = new Comment();
-		comment.setContent("Hello world");
-		comment.setDiscussId(1);
-		comment.setCommentId(1);
-		comment.setUserId(1);
-		commentService.insert(comment);
-		
 		pager(model, page, "id", "desc");
 		
-		return "UserView";
+		return "CommentView";
 	}
 	
 	@RequestMapping(value="/select/order/{orderBy}/ascend/{ascend}/{page}", method=RequestMethod.GET)
@@ -82,33 +71,33 @@ public class CommentCtrl {
 		
 		pager(model, page, orderBy, ascend);
 		
-		return "UserView";
+		return "CommentView";
 	}
 	
-	@RequestMapping(value="/update/{user_id}", method=RequestMethod.GET)
+	@RequestMapping(value="/update/{comment_id}", method=RequestMethod.GET)
 	public String update(
 			Model model, 
-			@PathVariable("user_id") Integer user_id,
+			@PathVariable("comment_id") Integer comment_id,
 			@ModelAttribute("redirect") String redirect
 	){
 		if( redirect != null ){
 			return redirect;
 		}
 		
-//		User user = userService.selectByPrimaryKey(user_id);
-//		if( user != null ){
-//			model.addAttribute("user", user);
-//			return "UserView";
-//		}
+		Comment comment = commentService.selectByPrimaryKey(comment_id);
+		if( comment != null ){
+			model.addAttribute("comment", comment);
+			return "CommentView";
+		}
 		
-		return "redirect:/cms/user/select";
+		return "redirect:/cms/comment/select";
 	}
 	
-	@RequestMapping(value="/update/{user_id}", method=RequestMethod.POST)
+	@RequestMapping(value="/update/{comment_id}", method=RequestMethod.POST)
 	public String update(
 			Model model, 
-			@PathVariable("user_id") Integer user_id,
-			@ModelAttribute("user") User user,
+			@PathVariable("comment_id") Integer comment_id,
+			@ModelAttribute("comment") Comment comment,
 			@RequestParam("referrer") String referrer,
 			@ModelAttribute("redirect") String redirect
 	){
@@ -116,55 +105,54 @@ public class CommentCtrl {
 			return redirect;
 		}
 		
-//		user.setId(user_id);
-//		user.setModifyDate(new Date());
-//		if( userService.updateByPrimaryKey(user) == 1 ){
-//			if( referrer != "" ){
-//				return "redirect:"+referrer.substring(referrer.lastIndexOf("/cms/"));
-//			}
-//			return "redirect:/cms/user/select";
-//		}
+		comment.setId(comment_id);
+		comment.setModifyDate(new Date());
+		if( commentService.updateByPrimaryKey(comment) == 1 ){
+			if( referrer != "" ){
+				return "redirect:"+referrer.substring(referrer.lastIndexOf("/cms/"));
+			}
+			return "redirect:/cms/comment/select";
+		}
 		
-		return "UserView";
+		return "CommentView";
 	}
 	
 	@RequestMapping(value="/delete", method=RequestMethod.POST)
 	public String delete(
 			Model model, 
-			@RequestParam("user_id") Integer user_id,
+			@RequestParam("comment_id") Integer comment_id,
 			@ModelAttribute("redirect") String redirect
 	){
 		if( redirect != null ){
 			return redirect;
 		}
 		
-//		User user = userService.selectByPrimaryKey(user_id);
-//		if( user != null ){
-//			user.setDeleted(1);
-//			userService.deleteByPrimaryKey(user);
-//		}
+		Comment comment = commentService.selectByPrimaryKey(comment_id);
+		if( comment != null ){
+			commentService.deleteByPrimaryKey(comment);
+		}
 		
-		return "redirect:/cms/user/select";
+		return "redirect:/cms/comment/select";
 	}
 	
 	private void pager(Model model, Integer page, String orderBy, String ascend){
-//		int pageSize = 20;
-//		long totalRecord = 0;
-//		totalRecord = userService.selectCount();
-//		int totalPage = (int)Math.ceil((double)totalRecord/pageSize);
-//		
-//		if( page < 1 || page > totalPage ){
-//			page = 1;
-//		}
-//		
-//		Integer offset = (page-1)*pageSize;
-//		List<User> user = null;
-//		user = userService.selectAll(orderBy, ascend, offset, pageSize);
-//		
-//		model.addAttribute("page", page);
-//		model.addAttribute("totalPage", totalPage);
-//		model.addAttribute("totalRecord", totalRecord);
-//		model.addAttribute("user", user);
+		int pageSize = 20;
+		long totalRecord = 0;
+		totalRecord = commentService.selectCount();
+		int totalPage = (int)Math.ceil((double)totalRecord/pageSize);
+		
+		if( page < 1 || page > totalPage ){
+			page = 1;
+		}
+		
+		Integer offset = (page-1)*pageSize;
+		List<Comment> comment = null;
+		comment = commentService.selectAll(orderBy, ascend, offset, pageSize);
+		
+		model.addAttribute("page", page);
+		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("totalRecord", totalRecord);
+		model.addAttribute("comment", comment);
 	}
 	
 	@ModelAttribute

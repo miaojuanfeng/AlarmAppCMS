@@ -219,7 +219,6 @@ public class UserCtrl {
 		}
 		
 		user.setId(user_id);
-		user.setModifyDate(new Date());
 		if( userService.updateByPrimaryKey(user) == 1 ){
 			if( referrer != "" ){
 				return "redirect:"+referrer.substring(referrer.lastIndexOf("/cms/"));
@@ -242,7 +241,6 @@ public class UserCtrl {
 		
 		User user = userService.selectByPrimaryKey(user_id);
 		if( user != null ){
-			user.setDeleted(1);
 			userService.deleteByPrimaryKey(user);
 		}
 		

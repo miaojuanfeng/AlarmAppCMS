@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>${classUpper} management</title>
+		<title>Product preset</title>
 
 		<%@ include file="inc/MetaArea.jsp" %>
 
@@ -91,7 +91,7 @@
 
 					<div class="col-sm-12">
 						<form:form name="update" method="post" modelAttribute="user">
-							<input type="hidden" name="user_id" value="${user.id}" />
+							<input type="hidden" name="product_id" value="${user.id}" />
 							<input type="hidden" name="referrer" value="${referer}" />
 							<div class="fieldset">
 								<div class="row">

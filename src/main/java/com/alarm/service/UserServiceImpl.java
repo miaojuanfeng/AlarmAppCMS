@@ -49,6 +49,7 @@ public class UserServiceImpl implements UserService {
 	public int deleteByPrimaryKey(User user) {
 		// TODO Auto-generated method stub
 		user.setModifyDate(new Date());
+		user.setDeleted(1);
 		return userDao.deleteByPrimaryKey(user);
 	}
 
