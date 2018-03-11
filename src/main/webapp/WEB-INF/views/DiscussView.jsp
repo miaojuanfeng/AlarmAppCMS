@@ -21,7 +21,7 @@
 		function check_delete(id){
 			var answer = confirm("Confirm delete?");
 			if(answer){
-				$('input[name="user_id"]').val(id);
+				$('input[name="discuss_id"]').val(id);
 				$('form[name="list"]').submit();
 			}else{
 				return false;
@@ -90,8 +90,8 @@
 					<h2 class="col-sm-12"><a href="<c:url value="/cms/${classLower}/select"></c:url>">${classUpper} management</a> > ${method} ${classLower}</h2>
 
 					<div class="col-sm-12">
-						<form:form name="update" method="post" modelAttribute="user">
-							<input type="hidden" name="product_id" value="${user.id}" />
+						<form:form name="update" method="post" modelAttribute="discuss">
+							<input type="hidden" name="discuss_id" value="${discuss.id}" />
 							<input type="hidden" name="referrer" value="${referer}" />
 							<div class="fieldset">
 								<div class="row">
@@ -105,16 +105,16 @@
 									<div class="col-sm-4 col-xs-12">
 										<h4 class="corpcolor-font">Basic information</h4>
 										<p class="form-group">
-											<label for="username">Username <span class="highlight">*</span></label>
-											<form:input id="username" path="username" type="text" class="form-control input-sm required" placeholder="Username" />
+											<label for="title">Title <span class="highlight">*</span></label>
+											<form:input id="title" path="title" type="text" class="form-control input-sm required" placeholder="Title" />
 										</p>
 										<div class="form-group">
-											<label for="number">Number <span class="highlight">*</span></label>
-											<form:input id="number" path="number" type="text" class="form-control input-sm required" placeholder="Number" />
+											<label for="userId">User <span class="highlight">*</span></label>
+											<form:input id="userId" path="userId" type="text" class="form-control input-sm required" placeholder="User" readonly="true" />
 										</div>
 										<div class="form-group">
-											<label for="nickname">Nickname <span class="highlight">*</span></label>
-											<form:input id="nickname" path="nickname" type="text" class="form-control input-sm required" placeholder="Nickname" />
+											<label for="content">Content <span class="highlight">*</span></label>
+											<form:textarea id="content" path="content" type="text" class="form-control input-sm required" placeholder="Content" />
 										</div>
 									</div>
 									<div class="col-sm-4 col-xs-12">
@@ -235,8 +235,8 @@
 						<div class="fieldset">
 							
 							<div class="list-area">
-								<form name="list" action="<c:url value="/cms/user/delete"></c:url>" method="post">
-									<input type="hidden" name="user_id" />
+								<form name="list" action="<c:url value="/cms/${classLower}/delete"></c:url>" method="post">
+									<input type="hidden" name="discuss_id" />
 									<%@ include file="inc/PageArea.jsp" %>
 									<table id="product" class="table table-striped table-bordered">
 										<thead>
@@ -245,52 +245,42 @@
 												<th>
 													<a href="
 														<c:choose>
-															<c:when test="${order == 'username' && ascend == 'asc'}">
-																<c:url value="/cms/user/select/order/username/ascend/desc/1"></c:url>
+															<c:when test="${order == 'title' && ascend == 'asc'}">
+																<c:url value="/cms/${classLower}/select/order/title/ascend/desc/1"></c:url>
 															</c:when>
 															<c:otherwise>
-																<c:url value="/cms/user/select/order/username/ascend/asc/1"></c:url>
+																<c:url value="/cms/${classLower}/select/order/title/ascend/asc/1"></c:url>
 															</c:otherwise>
 														</c:choose>
 													">
-														Username <i class="glyphicon glyphicon-sort corpcolor-font"></i>
+														Title <i class="glyphicon glyphicon-sort corpcolor-font"></i>
 													</a>
 												</th>
 												<th>
 													<a href="
 														<c:choose>
-															<c:when test="${order == 'number' && ascend == 'asc'}">
-																<c:url value="/cms/user/select/order/number/ascend/desc/1"></c:url>
+															<c:when test="${order == 'content' && ascend == 'asc'}">
+																<c:url value="/cms/${classLower}/select/order/content/ascend/desc/1"></c:url>
 															</c:when>
 															<c:otherwise>
-																<c:url value="/cms/user/select/order/number/ascend/asc/1"></c:url>
+																<c:url value="/cms/${classLower}/select/order/content/ascend/asc/1"></c:url>
 															</c:otherwise>
 														</c:choose>
 													">
-														Number <i class="glyphicon glyphicon-sort corpcolor-font"></i>
+														Content <i class="glyphicon glyphicon-sort corpcolor-font"></i>
 													</a>
 												</th>
 												<th>
-													<a href="
-														<c:choose>
-															<c:when test="${order == 'nickname' && ascend == 'asc'}">
-																<c:url value="/cms/user/select/order/nickname/ascend/desc/1"></c:url>
-															</c:when>
-															<c:otherwise>
-																<c:url value="/cms/user/select/order/nickname/ascend/asc/1"></c:url>
-															</c:otherwise>
-														</c:choose>">
-														Nickname <i class="glyphicon glyphicon-sort corpcolor-font"></i>
-													</a>
+														 User
 												</th>
 												<th>
 													<a href="
 														<c:choose>
 															<c:when test="${order == 'create_date' && ascend == 'asc'}">
-																<c:url value="/cms/user/select/order/create_date/ascend/desc/1"></c:url>
+																<c:url value="/cms/${classLower}/select/order/create_date/ascend/desc/1"></c:url>
 															</c:when>
 															<c:otherwise>
-																<c:url value="/cms/user/select/order/create_date/ascend/asc/1"></c:url>
+																<c:url value="/cms/${classLower}/select/order/create_date/ascend/asc/1"></c:url>
 															</c:otherwise>
 														</c:choose>
 													">
@@ -301,10 +291,10 @@
 													<a href="
 														<c:choose>
 															<c:when test="${order == 'modify_date' && ascend == 'asc'}">
-																<c:url value="/cms/user/select/order/modify_date/ascend/desc/1"></c:url>
+																<c:url value="/cms/${classLower}/select/order/modify_date/ascend/desc/1"></c:url>
 															</c:when>
 															<c:otherwise>
-																<c:url value="/cms/user/select/order/modify_date/ascend/asc/1"></c:url>
+																<c:url value="/cms/${classLower}/select/order/modify_date/ascend/asc/1"></c:url>
 															</c:otherwise>
 														</c:choose>
 														">
@@ -313,23 +303,23 @@
 												</th>
 												<th width="40"></th>
 												<th width="40" class="text-right">
-													<a href="<c:url value="/cms/user/insert"></c:url>" data-toggle="tooltip" title="Insert">
+													<%-- <a href="<c:url value="/cms/${classLower}/insert"></c:url>" data-toggle="tooltip" title="Insert">
 														<i class="glyphicon glyphicon-plus"></i>
-													</a>
+													</a> --%>
 												</th>
 											</tr>
 										</thead>
 										<tbody>
-											<c:forEach items="${user}" var="item">
+											<c:forEach items="${discuss}" var="item">
 											<tr>
 												<td title="${item.id}">${item.id}</td>
-												<td>${item.username}</td>
-												<td>${item.number}</td>
-												<td>${item.nickname}</td>
+												<td>${item.title}</td>
+												<td>${item.content}</td>
+												<td>${item.userId}</td>
 												<td><fmt:formatDate  value="${item.createDate}"  pattern="yyyy-MM-dd HH:mm:ss" /></td>
 												<td><fmt:formatDate  value="${item.modifyDate}"  pattern="yyyy-MM-dd HH:mm:ss" /></td>
 												<td class="text-right">
-													<a href="<c:url value="/cms/user/update/${item.id}"></c:url>" data-toggle="tooltip" title="Update">
+													<a href="<c:url value="/cms/${classLower}/update/${item.id}"></c:url>" data-toggle="tooltip" title="Update">
 														<i class="glyphicon glyphicon-edit"></i>
 													</a>
 												</td>

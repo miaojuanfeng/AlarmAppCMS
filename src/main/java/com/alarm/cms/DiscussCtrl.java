@@ -15,23 +15,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.alarm.model.Expert;
-import com.alarm.service.ExpertService;
+import com.alarm.model.Discuss;
+import com.alarm.service.DiscussService;
 import com.alarm.service.FuncService;
 
 @Controller
-@RequestMapping("cms/expert")
-public class ExpertCtrl {
+@RequestMapping("cms/discuss")
+public class DiscussCtrl {
 	
 	@Autowired
 	private FuncService funcService;
 	
 	@Autowired
-	private ExpertService expertService;
+	private DiscussService discussService;
 	
 	@RequestMapping(value="/select", method=RequestMethod.GET)
 	public String selectAll(){
-		return "redirect:/cms/expert/select/1";
+		return "redirect:/cms/discuss/select/1";
 	}
 	
 	@RequestMapping(value="/select/order/{orderBy}/ascend/{ascend}", method=RequestMethod.GET)
@@ -39,7 +39,7 @@ public class ExpertCtrl {
 			@PathVariable(value="orderBy") String orderBy,
 			@PathVariable(value="ascend") String ascend
 	){
-		return "redirect:/cms/expert/select/order/"+orderBy+"/ascend/"+ascend+"/1";
+		return "redirect:/cms/discuss/select/order/"+orderBy+"/ascend/"+ascend+"/1";
 	}
 	
 	@RequestMapping(value="/select/{page}", method=RequestMethod.GET)
@@ -54,7 +54,7 @@ public class ExpertCtrl {
 		
 		pager(model, page, "id", "desc");
 		
-		return "ExpertView";
+		return "DiscussView";
 	}
 	
 	@RequestMapping(value="/select/order/{orderBy}/ascend/{ascend}/{page}", method=RequestMethod.GET)
@@ -71,33 +71,33 @@ public class ExpertCtrl {
 		
 		pager(model, page, orderBy, ascend);
 		
-		return "ExpertView";
+		return "DiscussView";
 	}
 	
-	@RequestMapping(value="/update/{expert_id}", method=RequestMethod.GET)
+	@RequestMapping(value="/update/{discuss_id}", method=RequestMethod.GET)
 	public String update(
 			Model model, 
-			@PathVariable("expert_id") Integer expert_id,
+			@PathVariable("discuss_id") Integer discuss_id,
 			@ModelAttribute("redirect") String redirect
 	){
 		if( redirect != null ){
 			return redirect;
 		}
 		
-		Expert expert = expertService.selectByPrimaryKey(expert_id);
-		if( expert != null ){
-			model.addAttribute("expert", expert);
-			return "ExpertView";
+		Discuss discuss = discussService.selectByPrimaryKey(discuss_id);
+		if( discuss != null ){
+			model.addAttribute("discuss", discuss);
+			return "DiscussView";
 		}
 		
-		return "redirect:/cms/expert/select";
+		return "redirect:/cms/discuss/select";
 	}
 	
-	@RequestMapping(value="/update/{expert_id}", method=RequestMethod.POST)
+	@RequestMapping(value="/update/{discuss_id}", method=RequestMethod.POST)
 	public String update(
 			Model model, 
-			@PathVariable("expert_id") Integer expert_id,
-			@ModelAttribute("expert") Expert expert,
+			@PathVariable("discuss_id") Integer discuss_id,
+			@ModelAttribute("discuss") Discuss discuss,
 			@RequestParam("referrer") String referrer,
 			@ModelAttribute("redirect") String redirect
 	){
@@ -105,40 +105,40 @@ public class ExpertCtrl {
 			return redirect;
 		}
 		
-		expert.setId(expert_id);
-		expert.setModifyDate(new Date());
-		if( expertService.updateByPrimaryKey(expert) == 1 ){
+		discuss.setId(discuss_id);
+		discuss.setModifyDate(new Date());
+		if( discussService.updateByPrimaryKey(discuss) == 1 ){
 			if( referrer != "" ){
 				return "redirect:"+referrer.substring(referrer.lastIndexOf("/cms/"));
 			}
-			return "redirect:/cms/expert/select";
+			return "redirect:/cms/discuss/select";
 		}
 		
-		return "ExpertView";
+		return "DiscussView";
 	}
 	
 	@RequestMapping(value="/delete", method=RequestMethod.POST)
 	public String delete(
 			Model model, 
-			@RequestParam("expert_id") Integer expert_id,
+			@RequestParam("discuss_id") Integer discuss_id,
 			@ModelAttribute("redirect") String redirect
 	){
 		if( redirect != null ){
 			return redirect;
 		}
 		
-		Expert expert = expertService.selectByPrimaryKey(expert_id);
-		if( expert != null ){
-			expertService.deleteByPrimaryKey(expert);
+		Discuss discuss = discussService.selectByPrimaryKey(discuss_id);
+		if( discuss != null ){
+			discussService.deleteByPrimaryKey(discuss);
 		}
 		
-		return "redirect:/cms/expert/select";
+		return "redirect:/cms/discuss/select";
 	}
 	
 	private void pager(Model model, Integer page, String orderBy, String ascend){
 		int pageSize = 20;
 		long totalRecord = 0;
-		totalRecord = expertService.selectCount();
+		totalRecord = discussService.selectCount();
 		int totalPage = (int)Math.ceil((double)totalRecord/pageSize);
 		
 		if( page < 1 || page > totalPage ){
@@ -146,13 +146,13 @@ public class ExpertCtrl {
 		}
 		
 		Integer offset = (page-1)*pageSize;
-		List<Expert> expert = null;
-		expert = expertService.selectAll(orderBy, ascend, offset, pageSize);
+		List<Discuss> discuss = null;
+		discuss = discussService.selectAll(orderBy, ascend, offset, pageSize);
 		
 		model.addAttribute("page", page);
 		model.addAttribute("totalPage", totalPage);
 		model.addAttribute("totalRecord", totalRecord);
-		model.addAttribute("expert", expert);
+		model.addAttribute("discuss", discuss);
 	}
 	
 	@ModelAttribute
