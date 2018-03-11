@@ -235,7 +235,7 @@
 						<div class="fieldset">
 							
 							<div class="list-area">
-								<form name="list" action="<c:url value="/cms/user/delete"></c:url>" method="post">
+								<form name="list" action="<c:url value="/cms/${classLower}/delete"></c:url>" method="post">
 									<input type="hidden" name="user_id" />
 									<%@ include file="inc/PageArea.jsp" %>
 									<table id="product" class="table table-striped table-bordered">
@@ -246,10 +246,10 @@
 													<a href="
 														<c:choose>
 															<c:when test="${order == 'username' && ascend == 'asc'}">
-																<c:url value="/cms/user/select/order/username/ascend/desc/1"></c:url>
+																<c:url value="/cms/${classLower}/select/order/username/ascend/desc/1"></c:url>
 															</c:when>
 															<c:otherwise>
-																<c:url value="/cms/user/select/order/username/ascend/asc/1"></c:url>
+																<c:url value="/cms/${classLower}/select/order/username/ascend/asc/1"></c:url>
 															</c:otherwise>
 														</c:choose>
 													">
@@ -260,10 +260,10 @@
 													<a href="
 														<c:choose>
 															<c:when test="${order == 'number' && ascend == 'asc'}">
-																<c:url value="/cms/user/select/order/number/ascend/desc/1"></c:url>
+																<c:url value="/cms/${classLower}/select/order/number/ascend/desc/1"></c:url>
 															</c:when>
 															<c:otherwise>
-																<c:url value="/cms/user/select/order/number/ascend/asc/1"></c:url>
+																<c:url value="/cms/${classLower}/select/order/number/ascend/asc/1"></c:url>
 															</c:otherwise>
 														</c:choose>
 													">
@@ -274,10 +274,10 @@
 													<a href="
 														<c:choose>
 															<c:when test="${order == 'nickname' && ascend == 'asc'}">
-																<c:url value="/cms/user/select/order/nickname/ascend/desc/1"></c:url>
+																<c:url value="/cms/${classLower}/select/order/nickname/ascend/desc/1"></c:url>
 															</c:when>
 															<c:otherwise>
-																<c:url value="/cms/user/select/order/nickname/ascend/asc/1"></c:url>
+																<c:url value="/cms/${classLower}/select/order/nickname/ascend/asc/1"></c:url>
 															</c:otherwise>
 														</c:choose>">
 														Nickname <i class="glyphicon glyphicon-sort corpcolor-font"></i>
@@ -287,10 +287,10 @@
 													<a href="
 														<c:choose>
 															<c:when test="${order == 'create_date' && ascend == 'asc'}">
-																<c:url value="/cms/user/select/order/create_date/ascend/desc/1"></c:url>
+																<c:url value="/cms/${classLower}/select/order/create_date/ascend/desc/1"></c:url>
 															</c:when>
 															<c:otherwise>
-																<c:url value="/cms/user/select/order/create_date/ascend/asc/1"></c:url>
+																<c:url value="/cms/${classLower}/select/order/create_date/ascend/asc/1"></c:url>
 															</c:otherwise>
 														</c:choose>
 													">
@@ -301,10 +301,10 @@
 													<a href="
 														<c:choose>
 															<c:when test="${order == 'modify_date' && ascend == 'asc'}">
-																<c:url value="/cms/user/select/order/modify_date/ascend/desc/1"></c:url>
+																<c:url value="/cms/${classLower}/select/order/modify_date/ascend/desc/1"></c:url>
 															</c:when>
 															<c:otherwise>
-																<c:url value="/cms/user/select/order/modify_date/ascend/asc/1"></c:url>
+																<c:url value="/cms/${classLower}/select/order/modify_date/ascend/asc/1"></c:url>
 															</c:otherwise>
 														</c:choose>
 														">
@@ -313,7 +313,7 @@
 												</th>
 												<th width="40"></th>
 												<th width="40" class="text-right">
-													<a href="<c:url value="/cms/user/insert"></c:url>" data-toggle="tooltip" title="Insert">
+													<a href="<c:url value="/cms/${classLower}/insert"></c:url>" data-toggle="tooltip" title="Insert">
 														<i class="glyphicon glyphicon-plus"></i>
 													</a>
 												</th>
@@ -329,7 +329,7 @@
 												<td><fmt:formatDate  value="${item.createDate}"  pattern="yyyy-MM-dd HH:mm:ss" /></td>
 												<td><fmt:formatDate  value="${item.modifyDate}"  pattern="yyyy-MM-dd HH:mm:ss" /></td>
 												<td class="text-right">
-													<a href="<c:url value="/cms/user/update/${item.id}"></c:url>" data-toggle="tooltip" title="Update">
+													<a href="<c:url value="/cms/${classLower}/update/${item.id}"></c:url>" data-toggle="tooltip" title="Update">
 														<i class="glyphicon glyphicon-edit"></i>
 													</a>
 												</td>

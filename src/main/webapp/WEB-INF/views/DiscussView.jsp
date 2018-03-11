@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Product preset</title>
+		<title>${classUpper} management</title>
 
 		<%@ include file="inc/MetaArea.jsp" %>
 

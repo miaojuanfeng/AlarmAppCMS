@@ -239,27 +239,13 @@
 						<div class="fieldset">
 							
 							<div class="list-area">
-								<form name="list" action="<c:url value="/cms/comment/delete"></c:url>" method="post">
+								<form name="list" action="<c:url value="/cms/${classLower}/delete"></c:url>" method="post">
 									<input type="hidden" name="comment_id" />
 									<%@ include file="inc/PageArea.jsp" %>
 									<table id="product" class="table table-striped table-bordered">
 										<thead>
 											<tr>
 												<th>#</th>
-												<th>
-													<a href="
-														<c:choose>
-															<c:when test="${order == 'content' && ascend == 'asc'}">
-																<c:url value="/cms/comment/select/order/content/ascend/desc/1"></c:url>
-															</c:when>
-															<c:otherwise>
-																<c:url value="/cms/comment/select/order/content/ascend/asc/1"></c:url>
-															</c:otherwise>
-														</c:choose>
-													">
-														Content <i class="glyphicon glyphicon-sort corpcolor-font"></i>
-													</a>
-												</th>
 												<th>
 														User 
 												</th>
@@ -272,11 +258,25 @@
 												<th>
 													<a href="
 														<c:choose>
-															<c:when test="${order == 'create_date' && ascend == 'asc'}">
-																<c:url value="/cms/comment/select/order/create_date/ascend/desc/1"></c:url>
+															<c:when test="${order == 'content' && ascend == 'asc'}">
+																<c:url value="/cms/${classLower}/select/order/content/ascend/desc/1"></c:url>
 															</c:when>
 															<c:otherwise>
-																<c:url value="/cms/comment/select/order/create_date/ascend/asc/1"></c:url>
+																<c:url value="/cms/${classLower}/select/order/content/ascend/asc/1"></c:url>
+															</c:otherwise>
+														</c:choose>
+													">
+														Content <i class="glyphicon glyphicon-sort corpcolor-font"></i>
+													</a>
+												</th>
+												<th>
+													<a href="
+														<c:choose>
+															<c:when test="${order == 'create_date' && ascend == 'asc'}">
+																<c:url value="/cms/${classLower}/select/order/create_date/ascend/desc/1"></c:url>
+															</c:when>
+															<c:otherwise>
+																<c:url value="/cms/${classLower}/select/order/create_date/ascend/asc/1"></c:url>
 															</c:otherwise>
 														</c:choose>
 													">
@@ -287,10 +287,10 @@
 													<a href="
 														<c:choose>
 															<c:when test="${order == 'modify_date' && ascend == 'asc'}">
-																<c:url value="/cms/comment/select/order/modify_date/ascend/desc/1"></c:url>
+																<c:url value="/cms/${classLower}/select/order/modify_date/ascend/desc/1"></c:url>
 															</c:when>
 															<c:otherwise>
-																<c:url value="/cms/comment/select/order/modify_date/ascend/asc/1"></c:url>
+																<c:url value="/cms/${classLower}/select/order/modify_date/ascend/asc/1"></c:url>
 															</c:otherwise>
 														</c:choose>
 														">
@@ -299,7 +299,7 @@
 												</th>
 												<th width="40"></th>
 												<th width="40" class="text-right">
-													<%-- <a href="<c:url value="/cms/comment/insert"></c:url>" data-toggle="tooltip" title="Insert">
+													<%-- <a href="<c:url value="/cms/${classLower}/insert"></c:url>" data-toggle="tooltip" title="Insert">
 														<i class="glyphicon glyphicon-plus"></i>
 													</a> --%>
 												</th>
@@ -309,14 +309,14 @@
 											<c:forEach items="${comment}" var="item">
 											<tr>
 												<td title="${item.id}">${item.id}</td>
-												<td>${item.content}</td>
 												<td>${item.userId}</td>
 												<td>${item.commentId}</td>
 												<td>${item.discussId}</td>
+												<td>${item.content}</td>
 												<td><fmt:formatDate  value="${item.createDate}"  pattern="yyyy-MM-dd HH:mm:ss" /></td>
 												<td><fmt:formatDate  value="${item.modifyDate}"  pattern="yyyy-MM-dd HH:mm:ss" /></td>
 												<td class="text-right">
-													<a href="<c:url value="/cms/comment/update/${item.id}"></c:url>" data-toggle="tooltip" title="Update">
+													<a href="<c:url value="/cms/${classLower}/update/${item.id}"></c:url>" data-toggle="tooltip" title="Update">
 														<i class="glyphicon glyphicon-edit"></i>
 													</a>
 												</td>
