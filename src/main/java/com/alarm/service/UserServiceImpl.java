@@ -53,4 +53,14 @@ public class UserServiceImpl implements UserService {
 		return userDao.deleteByPrimaryKey(user);
 	}
 
+	public User selectByUsername(String username) {
+		// TODO Auto-generated method stub
+		return userDao.selectByUsername(username);
+	}
+
+	public User selectByNumber(Integer number) {
+		// TODO Auto-generated method stub
+		return userDao.selectByNumber(number);
+	}
+
 }

@@ -32,6 +32,13 @@
         length="255"
     />
     <property
+        name="password"
+        type="java.lang.String"
+        column="password"
+        not-null="true"
+        length="255"
+    />
+    <property
         name="number"
         type="int"
         column="number"

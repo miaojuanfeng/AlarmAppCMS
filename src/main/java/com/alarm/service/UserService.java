@@ -11,4 +11,6 @@ public interface UserService {
 	int deleteByPrimaryKey(User user);
 	Long selectCount();
 	List<User> selectAll(String orderBy, String ascend, int offset, int pageSize);
+	User selectByUsername(String username);
+	User selectByNumber(Integer number);
 }

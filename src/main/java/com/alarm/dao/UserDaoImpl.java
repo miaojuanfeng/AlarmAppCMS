@@ -85,4 +85,24 @@ public class UserDaoImpl implements UserDao {
         return query.executeUpdate();
 	}
 
+	public User selectByUsername(String username) {
+		// TODO Auto-generated method stub
+		String hql="from User where deleted=0 and username=?0";
+        Query query = getSession().createQuery(hql).setString("0", username);
+        if( query != null ){
+        	return (User)query.uniqueResult();
+        }
+        return null;
+	}
+
+	public User selectByNumber(Integer number) {
+		// TODO Auto-generated method stub
+		String hql="from User where deleted=0 and number=?0";
+        Query query = getSession().createQuery(hql).setInteger("0", number);
+        if( query != null ){
+        	return (User)query.uniqueResult();
+        }
+        return null;
+	}
+
 }

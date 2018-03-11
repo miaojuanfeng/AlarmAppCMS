@@ -7,6 +7,8 @@ public class User {
 
     private String username;
     
+    private String password;
+    
     private Integer number;
 
     private String nickname;
@@ -35,7 +37,15 @@ public class User {
         this.username = username == null ? null : username.trim();
     }
 
-    public Integer getNumber() {
+    public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password == null ? null : password.trim();
+	}
+
+	public Integer getNumber() {
 		return number;
 	}
 
