@@ -11,4 +11,5 @@ public interface DiscussDao {
 	int deleteByPrimaryKey(Discuss discuss);
 	Long selectCount();
 	List<Discuss> selectAll(String orderBy, String ascend, int offset, int pageSize);
+	List<Discuss> selectByUser(Integer user_id, String orderBy, String ascend, int offset, int pageSize);
 }

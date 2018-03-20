@@ -84,5 +84,23 @@ public class DiscussDaoImpl implements DiscussDao {
 		}
         return (List<Discuss>)query.list();
 	}
+	
+	public List<Discuss> selectByUser(Integer user_id, String orderBy, String ascend, int offset, int pageSize) {
+		// TODO Auto-generated method stub
+		String hql = "";
+		if( orderBy != null && ascend != null ){
+			hql="from Discuss where deleted=0 and user_id = " + user_id + " order by " + orderBy + " " + ascend;
+		}else{
+			hql="from Discuss where deleted=0 and user_id = " + user_id;
+		}
+		Query query = getSession().createQuery(hql);
+		if( offset >= -1 ){
+			query.setFirstResult(offset);
+		}
+		if( pageSize > 0 ){
+			query.setMaxResults(pageSize);
+		}
+        return (List<Discuss>)query.list();
+	}
 
 }

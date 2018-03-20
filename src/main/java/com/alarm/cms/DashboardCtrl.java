@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.alarm.model.User;
 import com.alarm.service.FuncService;
 
 @Controller
+@RequestMapping("/cms")
 public class DashboardCtrl {
 	
 	@Autowired
@@ -21,7 +21,7 @@ public class DashboardCtrl {
 	/*
 	 * 主页跳转
 	 */
-	@RequestMapping(value="/cms", method=RequestMethod.GET)
+	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String index(@ModelAttribute("redirect") String redirect){
 		
 		if( redirect != null ){
@@ -31,7 +31,7 @@ public class DashboardCtrl {
 		return "redirect:/cms/dashboard/select";
 	}
 	
-	@RequestMapping(value="/cms/dashboard/select", method=RequestMethod.GET)
+	@RequestMapping(value="/dashboard/select", method=RequestMethod.GET)
 	public String select(@ModelAttribute("redirect") String redirect){
 		
 		if( redirect != null ){

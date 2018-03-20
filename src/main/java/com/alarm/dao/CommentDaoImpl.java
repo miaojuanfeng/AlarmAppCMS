@@ -85,4 +85,22 @@ public class CommentDaoImpl implements CommentDao {
         return (List<Comment>)query.list();
 	}
 
+	public List<Comment> selectByDiscussId(Integer DiscussId, String orderBy, String ascend, int offset, int pageSize) {
+		// TODO Auto-generated method stub
+		String hql = "";
+		if( orderBy != null && ascend != null ){
+			hql="from Comment where deleted=0 and discuss_id = " + DiscussId + " order by " + orderBy + " " + ascend;
+		}else{
+			hql="from Comment where deleted=0 and discuss_id = " + DiscussId;
+		}
+		Query query = getSession().createQuery(hql);
+		if( offset >= -1 ){
+			query.setFirstResult(offset);
+		}
+		if( pageSize > 0 ){
+			query.setMaxResults(pageSize);
+		}
+        return (List<Comment>)query.list();
+	}
+
 }

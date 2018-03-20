@@ -51,4 +51,9 @@ public class DiscussServiceImpl implements DiscussService {
 		// TODO Auto-generated method stub
 		return discussDao.selectAll(orderBy, ascend, offset, pageSize);
 	}
+
+	public List<Discuss> selectByUser(Integer user_id, String orderBy, String ascend, int offset, int pageSize) {
+		// TODO Auto-generated method stub
+		return discussDao.selectByUser(user_id, orderBy, ascend, offset, pageSize);
+	}
 }

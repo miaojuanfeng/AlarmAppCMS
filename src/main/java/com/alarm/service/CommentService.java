@@ -11,4 +11,5 @@ public interface CommentService {
 	int deleteByPrimaryKey(Comment comment);
 	Long selectCount();
 	List<Comment> selectAll(String orderBy, String ascend, int offset, int pageSize);
+	List<Comment> selectByDiscussId(Integer DiscussId, String orderBy, String ascend, int offset, int pageSize);
 }

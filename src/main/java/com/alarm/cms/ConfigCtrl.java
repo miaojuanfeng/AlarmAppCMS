@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.alarm.model.Config;
-import com.alarm.model.User;
 import com.alarm.service.ConfigService;
 import com.alarm.service.FuncService;
 

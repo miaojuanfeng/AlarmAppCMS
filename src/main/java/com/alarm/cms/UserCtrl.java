@@ -257,8 +257,7 @@ public class UserCtrl {
 		}
 		
 		Integer offset = (page-1)*pageSize;
-		List<User> user = null;
-		user = userService.selectAll(orderBy, ascend, offset, pageSize);
+		List<User> user = userService.selectAll(orderBy, ascend, offset, pageSize);
 		
 		model.addAttribute("page", page);
 		model.addAttribute("totalPage", totalPage);

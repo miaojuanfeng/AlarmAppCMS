@@ -146,8 +146,7 @@ public class ExpertCtrl {
 		}
 		
 		Integer offset = (page-1)*pageSize;
-		List<Expert> expert = null;
-		expert = expertService.selectAll(orderBy, ascend, offset, pageSize);
+		List<Expert> expert = expertService.selectAll(orderBy, ascend, offset, pageSize);
 		
 		model.addAttribute("page", page);
 		model.addAttribute("totalPage", totalPage);

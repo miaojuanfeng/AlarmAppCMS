@@ -134,21 +134,20 @@ public class DiscussCtrl {
 		
 		return "redirect:/cms/discuss/select";
 	}
-	
+
 	private void pager(Model model, Integer page, String orderBy, String ascend){
 		int pageSize = 20;
 		long totalRecord = 0;
 		totalRecord = discussService.selectCount();
 		int totalPage = (int)Math.ceil((double)totalRecord/pageSize);
-		
+
 		if( page < 1 || page > totalPage ){
 			page = 1;
 		}
-		
+
 		Integer offset = (page-1)*pageSize;
-		List<Discuss> discuss = null;
-		discuss = discussService.selectAll(orderBy, ascend, offset, pageSize);
-		
+		List<Discuss> discuss = discussService.selectAll(orderBy, ascend, offset, pageSize);
+
 		model.addAttribute("page", page);
 		model.addAttribute("totalPage", totalPage);
 		model.addAttribute("totalRecord", totalRecord);

@@ -51,5 +51,10 @@ public class CommentServiceImpl implements CommentService{
 		// TODO Auto-generated method stub
 		return commentDao.selectAll(orderBy, ascend, offset, pageSize);
 	}
+
+	public List<Comment> selectByDiscussId(Integer DiscussId, String orderBy, String ascend, int offset, int pageSize) {
+		// TODO Auto-generated method stub
+		return commentDao.selectByDiscussId(DiscussId, orderBy, ascend, offset, pageSize);
+	}
 	
 }

@@ -146,8 +146,7 @@ public class CommentCtrl {
 		}
 		
 		Integer offset = (page-1)*pageSize;
-		List<Comment> comment = null;
-		comment = commentService.selectAll(orderBy, ascend, offset, pageSize);
+		List<Comment> comment = commentService.selectAll(orderBy, ascend, offset, pageSize);
 		
 		model.addAttribute("page", page);
 		model.addAttribute("totalPage", totalPage);
