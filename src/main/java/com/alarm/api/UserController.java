@@ -25,6 +25,7 @@ public class UserController {
 	/**
 	 * 用户注册
 	 * @url ${base_url}/api/user/signup
+	 * @method POST
 	 * @param String user_username
 	 * @param String user_password
 	 * @return  Json {
@@ -87,6 +88,7 @@ public class UserController {
 	/**
 	 * 用户登录
 	 * @url ${base_url}/api/user/signin
+	 * @method POST
 	 * @param String user_username
 	 * @param String user_password
 	 * @return  Json {
@@ -130,6 +132,7 @@ public class UserController {
 	/**
 	 * 更新用户昵称
 	 * @url ${base_url}/api/user/update_nickname
+	 * @method POST
 	 * @param Integer user_id
 	 * @param String user_nickname
 	 * @return Json
@@ -146,6 +149,7 @@ public class UserController {
 	/**
 	 * 更新用户密码
 	 * @url ${base_url}/api/user/update_password
+	 * @method POST
 	 * @param user_id
 	 * @param user_password
 	 * @return Json

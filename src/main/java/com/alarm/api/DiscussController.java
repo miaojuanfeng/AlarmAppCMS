@@ -21,15 +21,16 @@ public class DiscussController {
 	
 	/**
 	 * 创建新话题
-	 * @url ${base_url}/api/discuss/subject
+	 * @url ${base_url}/api/discuss/insert
+	 * @method POST
 	 * @param String discuss_title
 	 * @param String discuss_content
 	 * @param Integer discuss_user_id
 	 * @return Json
 	 */
-	@RequestMapping(value="/subject", method=RequestMethod.POST)
+	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	public String subject(@RequestParam("discuss_title") String discuss_title, @RequestParam("discuss_content") String discuss_content, @RequestParam("discuss_user_id") Integer discuss_user_id){
+	public String insert(@RequestParam("discuss_title") String discuss_title, @RequestParam("discuss_content") String discuss_content, @RequestParam("discuss_user_id") Integer discuss_user_id){
 		JSONObject retval = new JSONObject();
 		
 		Discuss discuss = new Discuss();
@@ -42,23 +43,6 @@ public class DiscussController {
 		}else{
 			retval.put("status", false);
 		}
-		
-		return retval.toString();
-	}
-	
-	/**
-	 * 添加评论
-	 * @url ${base_url}/api/discuss/comment
-	 * @param Integer comment_discuss_id
-	 * @param Integer comment_comment_id
-	 * @param Integer comment_user_id
-	 * @param String comment_content
-	 * @return Json
-	 */
-	@RequestMapping(value="/comment", method=RequestMethod.POST)
-	@ResponseBody
-	public String comment(@RequestParam("comment_discuss_id") Integer comment_discuss_id, @RequestParam("comment_comment_id") Integer comment_comment_id, @RequestParam("comment_user_id") Integer comment_user_id, @RequestParam("comment_content") String comment_content){
-		JSONObject retval = new JSONObject();
 		
 		return retval.toString();
 	}
