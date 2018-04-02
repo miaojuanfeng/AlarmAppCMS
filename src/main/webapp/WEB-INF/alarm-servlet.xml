@@ -17,7 +17,7 @@
         http://www.springframework.org/schema/aop/spring-aop.xsd">  
   
   	<!-- 开启自动扫包 -->
-    <context:component-scan base-package="com.alarm.api,com.alarm.cms,com.alarm.dao,com.alarm.service" />
+    <context:component-scan base-package="com.alarm.api,com.alarm.cms,com.alarm.dao,com.alarm.service,com.alarm.filter" />
     
     <!-- 文件上传 -->
     <!-- <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" /> -->
