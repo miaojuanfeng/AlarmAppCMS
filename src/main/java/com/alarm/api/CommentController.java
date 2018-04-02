@@ -17,7 +17,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 @Controller
-@RequestMapping("api/comment")
+@RequestMapping(value="api/comment", produces="text/html;charset=UTF-8")
 public class CommentController {
 	@Autowired
 	private CommentService commentService;
