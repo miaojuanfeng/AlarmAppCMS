@@ -183,8 +183,6 @@ public class UserCtrl {
 			return "redirect:/cms/user/select";
 		}
 		
-		System.out.println("asdas");
-		
 		return "UserView";
 	}
 	

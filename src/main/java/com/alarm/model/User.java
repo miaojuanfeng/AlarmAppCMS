@@ -20,6 +20,8 @@ public class User {
     private Date modifyDate;
 
     private Integer deleted;
+    
+//    private Discuss discuss;
 
     public Integer getId() {
         return id;
@@ -92,5 +94,13 @@ public class User {
     public void setDeleted(Integer deleted) {
         this.deleted = deleted;
     }
+
+//	public Discuss getDiscuss() {
+//		return discuss;
+//	}
+//
+//	public void setDiscuss(Discuss discuss) {
+//		this.discuss = discuss;
+//	}
     
 }

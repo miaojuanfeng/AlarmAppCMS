@@ -6,7 +6,7 @@ public class Discuss {
 	private Integer id;
 	private String title;
 	private String content;
-	private Integer userId;
+	private User user;
 	private Date createDate;
 	private Date modifyDate;
 	private Integer deleted;
@@ -28,11 +28,11 @@ public class Discuss {
 	public void setContent(String content) {
 		this.content = content == null ? null : content.trim();
 	}
-	public Integer getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setUser(User userId) {
+		this.user = userId;
 	}
 	public Date getCreateDate() {
 		return createDate;

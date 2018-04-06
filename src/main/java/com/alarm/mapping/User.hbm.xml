@@ -82,7 +82,7 @@
     />
 
     <!-- Associations -->
-  
+  	<!-- <one-to-one name="discuss" class="com.alarm.model.Discuss" cascade="save-update"></one-to-one> -->
 
 </class>
 </hibernate-mapping>

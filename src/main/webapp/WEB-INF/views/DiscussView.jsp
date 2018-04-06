@@ -315,7 +315,7 @@
 												<td title="${item.id}">${item.id}</td>
 												<td>${item.title}</td>
 												<td>${item.content}</td>
-												<td>${item.userId}</td>
+												<td>${item.user.nickname}</td>
 												<td><fmt:formatDate  value="${item.createDate}"  pattern="yyyy-MM-dd HH:mm:ss" /></td>
 												<td><fmt:formatDate  value="${item.modifyDate}"  pattern="yyyy-MM-dd HH:mm:ss" /></td>
 												<td class="text-right">
