@@ -108,17 +108,24 @@
 											<label for="username">Username <span class="highlight">*</span></label>
 											<form:input id="username" path="username" type="text" class="form-control input-sm required" placeholder="Username" />
 										</p>
-										<div class="form-group">
-											<label for="number">Number <span class="highlight">*</span></label>
-											<form:input id="number" path="number" type="text" class="form-control input-sm required" placeholder="Number" />
-										</div>
+										<p class="form-group">
+											<label for="password">Password <span class="highlight">*</span></label>
+											<form:input id="password" path="password" type="password" class="form-control input-sm required" placeholder="Password" />
+										</p>
+									</div>
+									<div class="col-sm-4 col-xs-12">
+										<h4 class="corpcolor-font">Basic information</h4>
 										<div class="form-group">
 											<label for="nickname">Nickname <span class="highlight">*</span></label>
 											<form:input id="nickname" path="nickname" type="text" class="form-control input-sm required" placeholder="Nickname" />
 										</div>
-									</div>
-									<div class="col-sm-4 col-xs-12">
-
+										<div class="form-group">
+											<label for="platform">Platform <span class="highlight">*</span></label>
+											<form:select path="platform" class="form-control input-sm required">
+												<form:option value="ios" selected="selected">ios</form:option>
+												<form:option value="android">android</form:option>
+											</form:select>
+										</div>
 									</div>
 								</div>
 

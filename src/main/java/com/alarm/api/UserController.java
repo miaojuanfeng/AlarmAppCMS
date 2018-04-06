@@ -44,7 +44,7 @@ public class UserController {
 		
 		User user = userService.selectByUsername(user_username);
 		if( user == null ){
-			user_password = DigestUtils.md5Hex(user_password);
+//			user_password = DigestUtils.md5Hex(user_password);
 	        
 			user = new User();
 			user.setUsername(user_username);

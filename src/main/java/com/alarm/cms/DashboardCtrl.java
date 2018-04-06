@@ -21,7 +21,7 @@ public class DashboardCtrl {
 	/*
 	 * 主页跳转
 	 */
-	@RequestMapping(value="/", method=RequestMethod.GET)
+	@RequestMapping(value="", method=RequestMethod.GET)
 	public String index(@ModelAttribute("redirect") String redirect){
 		
 		if( redirect != null ){

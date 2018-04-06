@@ -38,7 +38,15 @@ public class UserServiceImpl implements UserService {
 
 	public int insert(User user) {
 		// TODO Auto-generated method stub
-		user.setPlatform("ios");
+		int user_number = 0;
+		while(true){
+			user_number = (int)((Math.random()*9+1)*1000000000);
+			User exist_user = this.selectByNumber(user_number);
+			if( exist_user == null ){
+				break;
+			}
+		}
+		user.setNumber(user_number);
 		Date date = new Date();
 		user.setCreateDate(date);
 		user.setModifyDate(date);
