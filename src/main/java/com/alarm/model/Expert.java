@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Expert {
 	private Integer id;
-	private Integer discussId;
+	private Discuss discuss;
 	private String content;
 	private Date createDate;
 	private Date modifyDate;
@@ -15,11 +15,11 @@ public class Expert {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Integer getDiscussId() {
-		return discussId;
+	public Discuss getDiscuss() {
+		return discuss;
 	}
-	public void setDiscussId(Integer discussId) {
-		this.discussId = discussId;
+	public void setDiscuss(Discuss discuss) {
+		this.discuss = discuss;
 	}
 	public String getContent() {
 		return content;
