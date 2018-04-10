@@ -103,14 +103,5 @@ public class User {
 	public void setDiscuss(Set<Discuss> discuss) {
 		this.discuss = discuss;
 	}
-
-//	public Discuss getDiscuss() {
-//		return discuss;
-//	}
-//
-//	public void setDiscuss(Discuss discuss) {
-//		this.discuss = discuss;
-//	}
-    
     
 }
