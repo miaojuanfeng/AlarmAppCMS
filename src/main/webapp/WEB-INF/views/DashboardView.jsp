@@ -177,71 +177,15 @@
 
 							<div class="list-area no-overflow-x">
 								<div class="row">
-									<div class="col-md-5 col-sm-12" style="margin-bottom:10px;">
+									<div class="col-md-6 col-sm-12" style="margin-bottom:10px;">
 										<h4 class="corpcolor-font"><i class="glyphicon glyphicon-bullhorn"> Chart</i></h4>
 										<!-- <div id="visualization" class="chart-area"></div> -->
 										<div id="chart1" class="chart-area"></div>
 									</div>
-									<div class="col-md-7 col-sm-12" style="margin-bottom:10px;">
-										<h4 class="corpcolor-font"><i class="glyphicon glyphicon-bullhorn"> Notification</i></h4>
-										<table class="table table-striped table-bordered">
-											<thead>
-												<tr>
-													<th>Customer name</th>
-													<th>Quotation #</th>
-													<th>Sales order #</th>
-													<th>Purchase order #</th>
-													<th>Invoice #</th>
-													<th>Delivery note #</th>
-												</tr>
-											</thead>
-											<tbody>
-												<?php for($i=0; $i<5; $i++){ ?>
-												<tr>
-													<td>Eddie Chu</td>
-													<td><a href="#">QO17060001</a></td>
-													<td><a href="#">SO17060001</a></td>
-													<td><a href="#">PO17060001</a></td>
-													<td><a href="#">IN17060001</a></td>
-													<td><a href="#">DN17060001</a></td>
-												</tr>
-												<?php } ?>
-											</tbody>
-										</table>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-5 col-sm-12" style="margin-bottom:10px;">
+									<div class="col-md-6 col-sm-12" style="margin-bottom:10px;">
 										<h4 class="corpcolor-font"><i class="glyphicon glyphicon-bullhorn"> Chart</i></h4>
 										<!-- <div id="visualization2" class="chart-area"></div> -->
 										<div id="chart2" class="chart-area"></div>
-									</div>
-									<div class="col-md-7 col-sm-12" style="margin-bottom:10px;">
-										<h4 class="corpcolor-font"><i class="glyphicon glyphicon-bullhorn"> Notification</i></h4>
-										<table class="table table-striped table-bordered">
-											<thead>
-												<tr>
-													<th>Customer name</th>
-													<th>Quotation #</th>
-													<th>Sales order #</th>
-													<th>Purchase order #</th>
-													<th>Invoice #</th>
-													<th>Delivery note #</th>
-												</tr>
-											</thead>
-											<tbody>
-												<?php for($i=0; $i<5; $i++){ ?>
-												<tr>
-													<td>Eddie Chu</td>
-													<td><a href="#">QO17060001</a></td>
-													<td><a href="#">SO17060001</a></td>
-													<td><a href="#">PO17060001</a></td>
-													<td><a href="#">IN17060001</a></td>
-													<td><a href="#">DN17060001</a></td>
-												</tr>
-												<?php } ?>
-											</tbody>
-										</table>
 									</div>
 								</div>
 							</div> <!-- list-area -->	

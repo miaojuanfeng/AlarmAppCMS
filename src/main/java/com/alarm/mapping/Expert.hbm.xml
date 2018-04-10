@@ -24,13 +24,13 @@
         <generator class="increment" />
     </id>
 
-    <property
+    <!-- <property
         name="discussId"
         type="int"
         column="discuss_id"
         not-null="true"
         length="10"
-    />
+    /> -->
     <property
         name="content"
         type="java.lang.String"
@@ -61,7 +61,7 @@
     />
 
     <!-- Associations -->
-  
+  	<many-to-one name="discuss" unique="true" column="discuss_id" class="com.alarm.model.Discuss" cascade="save-update"></many-to-one>
 
 </class>
 </hibernate-mapping>

@@ -61,7 +61,7 @@ public class UserDaoImpl implements UserDao {
 
 	public int updateByPrimaryKey(User user) {
 		// TODO Auto-generated method stub
-		String hql="update User set username=:username, number=:number, nickname=:nickname, modify_date=:modifyDate where deleted=0 and id=:id";
+		String hql="update User set username=:username, password=:password, nickname=:nickname, platform=:platform, modify_date=:modifyDate where deleted=0 and id=:id";
 		Query query = getSession().createQuery(hql);
 		query.setProperties(user);
         return query.executeUpdate();

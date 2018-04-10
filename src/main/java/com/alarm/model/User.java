@@ -1,6 +1,7 @@
 package com.alarm.model;
 
 import java.util.Date;
+import java.util.Set;
 
 public class User {
     private Integer id;
@@ -20,6 +21,8 @@ public class User {
     private Date modifyDate;
 
     private Integer deleted;
+    
+    private Set<Discuss> discuss;
 
     public Integer getId() {
         return id;
@@ -92,5 +95,22 @@ public class User {
     public void setDeleted(Integer deleted) {
         this.deleted = deleted;
     }
+
+	public Set<Discuss> getDiscuss() {
+		return discuss;
+	}
+
+	public void setDiscuss(Set<Discuss> discuss) {
+		this.discuss = discuss;
+	}
+
+//	public Discuss getDiscuss() {
+//		return discuss;
+//	}
+//
+//	public void setDiscuss(Discuss discuss) {
+//		this.discuss = discuss;
+//	}
+    
     
 }

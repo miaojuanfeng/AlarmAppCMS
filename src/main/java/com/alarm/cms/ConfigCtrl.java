@@ -30,13 +30,8 @@ public class ConfigCtrl {
 	
 	@RequestMapping(value="/update", method=RequestMethod.GET)
 	public String update(
-			Model model, 
-			@ModelAttribute("redirect") String redirect
+			Model model
 	){
-		if( redirect != null ){
-			return redirect;
-		}
-		
 		Config administrator = configService.selectByTitle("Administrator");
 		JSONObject administratorObj = JSONObject.fromObject(administrator.getValue());
 		model.addAttribute("username", administratorObj.getString("username"));
@@ -46,14 +41,9 @@ public class ConfigCtrl {
 	
 	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public String update(
-			@ModelAttribute("redirect") String redirect,
 			@RequestParam("username") String username,
 			@RequestParam("password") String password
 	){
-		if( redirect != null ){
-			return redirect;
-		}
-		
 		Config config = new Config();
 		/*
 		 * update administrator

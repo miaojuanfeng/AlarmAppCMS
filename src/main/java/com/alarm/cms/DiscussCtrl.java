@@ -45,13 +45,8 @@ public class DiscussCtrl {
 	@RequestMapping(value="/select/{page}", method=RequestMethod.GET)
 	public String selectAll(
 			Model model,  
-			@PathVariable(value="page") Integer page,
-			@ModelAttribute("redirect") String redirect
+			@PathVariable(value="page") Integer page
 	){
-		if( redirect != null ){
-			return redirect;
-		}
-		
 		pager(model, page, "id", "desc");
 		
 		return "DiscussView";
@@ -62,13 +57,8 @@ public class DiscussCtrl {
 			Model model,  
 			@PathVariable(value="orderBy") String orderBy,
 			@PathVariable(value="ascend") String ascend,
-			@PathVariable(value="page") Integer page,
-			@ModelAttribute("redirect") String redirect
+			@PathVariable(value="page") Integer page
 	){
-		if( redirect != null ){
-			return redirect;
-		}
-		
 		pager(model, page, orderBy, ascend);
 		
 		return "DiscussView";
@@ -77,13 +67,8 @@ public class DiscussCtrl {
 	@RequestMapping(value="/update/{discuss_id}", method=RequestMethod.GET)
 	public String update(
 			Model model, 
-			@PathVariable("discuss_id") Integer discuss_id,
-			@ModelAttribute("redirect") String redirect
+			@PathVariable("discuss_id") Integer discuss_id
 	){
-		if( redirect != null ){
-			return redirect;
-		}
-		
 		Discuss discuss = discussService.selectByPrimaryKey(discuss_id);
 		if( discuss != null ){
 			model.addAttribute("discuss", discuss);
@@ -98,13 +83,8 @@ public class DiscussCtrl {
 			Model model, 
 			@PathVariable("discuss_id") Integer discuss_id,
 			@ModelAttribute("discuss") Discuss discuss,
-			@RequestParam("referrer") String referrer,
-			@ModelAttribute("redirect") String redirect
+			@RequestParam("referrer") String referrer
 	){
-		if( redirect != null ){
-			return redirect;
-		}
-		
 		discuss.setId(discuss_id);
 		discuss.setModifyDate(new Date());
 		if( discussService.updateByPrimaryKey(discuss) == 1 ){
@@ -120,13 +100,8 @@ public class DiscussCtrl {
 	@RequestMapping(value="/delete", method=RequestMethod.POST)
 	public String delete(
 			Model model, 
-			@RequestParam("discuss_id") Integer discuss_id,
-			@ModelAttribute("redirect") String redirect
+			@RequestParam("discuss_id") Integer discuss_id
 	){
-		if( redirect != null ){
-			return redirect;
-		}
-		
 		Discuss discuss = discussService.selectByPrimaryKey(discuss_id);
 		if( discuss != null ){
 			discussService.deleteByPrimaryKey(discuss);

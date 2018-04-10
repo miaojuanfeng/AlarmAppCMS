@@ -28,12 +28,12 @@ public class FuncServiceImpl implements FuncService {
 	public void modelAttribute(Model model, HttpSession httpSession, HttpServletRequest request){
 		//判断是否登录
 		User user = (User)httpSession.getAttribute("user");
-		if( user == null ){
-			model.addAttribute("redirect", "redirect:/cms/user/login");
-			return;
-		}else{
-			model.addAttribute("redirect", null);
-		}
+//		if( user == null ){
+//			model.addAttribute("redirect", "redirect:/cms/user/login");
+//			return;
+//		}else{
+//			model.addAttribute("redirect", null);
+//		}
 		
 		//分割url字符串,获取cms下标
 		String[] urlArr = request.getRequestURL().toString().split("/");

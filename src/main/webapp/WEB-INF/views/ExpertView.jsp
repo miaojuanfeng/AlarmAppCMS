@@ -295,7 +295,7 @@
 											<c:forEach items="${expert}" var="item">
 											<tr>
 												<td title="${item.id}">${item.id}</td>
-												<td>${item.discussId}</td>
+												<td>${item.discuss.title}</td>
 												<td>${item.content}</td>
 												<td><fmt:formatDate  value="${item.createDate}"  pattern="yyyy-MM-dd HH:mm:ss" /></td>
 												<td><fmt:formatDate  value="${item.modifyDate}"  pattern="yyyy-MM-dd HH:mm:ss" /></td>

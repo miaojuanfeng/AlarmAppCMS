@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alarm.model.Discuss;
+import com.alarm.model.User;
 import com.alarm.service.DiscussService;
 
 import net.sf.json.JSONArray;
@@ -44,7 +45,7 @@ public class DiscussController {
 			JSONObject t = new JSONObject();
 			t.put("id", descuss.getId());
 			t.put("title", descuss.getTitle());
-			t.put("user_id", descuss.getUserId());
+			t.put("user", descuss.getUser());
 			t.put("create_date", descuss.getCreateDate().getTime());
 			temp.add(t);
 		}
@@ -76,7 +77,7 @@ public class DiscussController {
 			JSONObject t = new JSONObject();
 			t.put("id", d.getId());
 			t.put("title", d.getTitle());
-			t.put("user_id", d.getUserId());
+			t.put("user", d.getUser());
 			t.put("create_date", d.getCreateDate().getTime());
 			temp.add(t);
 		}
@@ -99,7 +100,7 @@ public class DiscussController {
 			temp.put("id", discuss.getId());
 			temp.put("title", discuss.getTitle());
 			temp.put("content", discuss.getContent());
-			temp.put("user_id", discuss.getUserId());
+			temp.put("user", discuss.getUser());
 			temp.put("create_date", discuss.getCreateDate().getTime());
 		}
 		
@@ -126,7 +127,9 @@ public class DiscussController {
 		Discuss discuss = new Discuss();
 		discuss.setTitle(discuss_title);
 		discuss.setContent(discuss_content);
-		discuss.setUserId(discuss_user_id);
+		User user = new User();
+		user.setId(discuss_user_id);
+		discuss.setUser(user);
 		
 		if( discussService.insert(discuss) == 1 ){
 			retval.put("status", true);

@@ -82,7 +82,11 @@
     />
 
     <!-- Associations -->
-  
+  	<!-- <one-to-one name="discuss" class="com.alarm.model.Discuss" cascade="save-update"></one-to-one> -->
+  	<set name="discuss" inverse="true">
+  		<key column="user_id"></key>
+  		<one-to-many class="com.alarm.model.Discuss"></one-to-many>
+  	</set>
 
 </class>
 </hibernate-mapping>

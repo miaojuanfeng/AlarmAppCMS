@@ -38,13 +38,13 @@
         not-null="true"
         length="2147483647"
     />
-    <property
+    <!-- <property
         name="userId"
         type="int"
         column="user_id"
         not-null="true"
         length="10"
-    />
+    /> -->
     <property
         name="createDate"
         type="java.sql.Timestamp"
@@ -68,7 +68,7 @@
     />
 
     <!-- Associations -->
-  
+  	<many-to-one name="user" unique="true" column="user_id" class="com.alarm.model.User" cascade="save-update"></many-to-one>
 
 </class>
 </hibernate-mapping>

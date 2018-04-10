@@ -45,13 +45,8 @@ public class CommentCtrl {
 	@RequestMapping(value="/select/{page}", method=RequestMethod.GET)
 	public String selectAll(
 			Model model,  
-			@PathVariable(value="page") Integer page,
-			@ModelAttribute("redirect") String redirect
+			@PathVariable(value="page") Integer page
 	){
-		if( redirect != null ){
-			return redirect;
-		}
-		
 		pager(model, page, "id", "desc");
 		
 		return "CommentView";
@@ -62,13 +57,8 @@ public class CommentCtrl {
 			Model model,  
 			@PathVariable(value="orderBy") String orderBy,
 			@PathVariable(value="ascend") String ascend,
-			@PathVariable(value="page") Integer page,
-			@ModelAttribute("redirect") String redirect
+			@PathVariable(value="page") Integer page
 	){
-		if( redirect != null ){
-			return redirect;
-		}
-		
 		pager(model, page, orderBy, ascend);
 		
 		return "CommentView";
@@ -77,13 +67,8 @@ public class CommentCtrl {
 	@RequestMapping(value="/update/{comment_id}", method=RequestMethod.GET)
 	public String update(
 			Model model, 
-			@PathVariable("comment_id") Integer comment_id,
-			@ModelAttribute("redirect") String redirect
+			@PathVariable("comment_id") Integer comment_id
 	){
-		if( redirect != null ){
-			return redirect;
-		}
-		
 		Comment comment = commentService.selectByPrimaryKey(comment_id);
 		if( comment != null ){
 			model.addAttribute("comment", comment);
@@ -98,13 +83,8 @@ public class CommentCtrl {
 			Model model, 
 			@PathVariable("comment_id") Integer comment_id,
 			@ModelAttribute("comment") Comment comment,
-			@RequestParam("referrer") String referrer,
-			@ModelAttribute("redirect") String redirect
+			@RequestParam("referrer") String referrer
 	){
-		if( redirect != null ){
-			return redirect;
-		}
-		
 		comment.setId(comment_id);
 		comment.setModifyDate(new Date());
 		if( commentService.updateByPrimaryKey(comment) == 1 ){
@@ -120,13 +100,8 @@ public class CommentCtrl {
 	@RequestMapping(value="/delete", method=RequestMethod.POST)
 	public String delete(
 			Model model, 
-			@RequestParam("comment_id") Integer comment_id,
-			@ModelAttribute("redirect") String redirect
+			@RequestParam("comment_id") Integer comment_id
 	){
-		if( redirect != null ){
-			return redirect;
-		}
-		
 		Comment comment = commentService.selectByPrimaryKey(comment_id);
 		if( comment != null ){
 			commentService.deleteByPrimaryKey(comment);

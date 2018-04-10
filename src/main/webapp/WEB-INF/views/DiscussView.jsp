@@ -109,8 +109,8 @@
 											<form:input id="title" path="title" type="text" class="form-control input-sm required" placeholder="Title" />
 										</p>
 										<div class="form-group">
-											<label for="userId">User <span class="highlight">*</span></label>
-											<form:input id="userId" path="userId" type="text" class="form-control input-sm required" placeholder="User" readonly="true" />
+											<label for="user">User <span class="highlight">*</span></label>
+											<form:input id="user" path="user.nickname" type="text" class="form-control input-sm required" placeholder="User" readonly="true" />
 										</div>
 										<div class="form-group">
 											<label for="content">Content <span class="highlight">*</span></label>
@@ -315,7 +315,7 @@
 												<td title="${item.id}">${item.id}</td>
 												<td>${item.title}</td>
 												<td>${item.content}</td>
-												<td>${item.userId}</td>
+												<td>${item.user.nickname}</td>
 												<td><fmt:formatDate  value="${item.createDate}"  pattern="yyyy-MM-dd HH:mm:ss" /></td>
 												<td><fmt:formatDate  value="${item.modifyDate}"  pattern="yyyy-MM-dd HH:mm:ss" /></td>
 												<td class="text-right">

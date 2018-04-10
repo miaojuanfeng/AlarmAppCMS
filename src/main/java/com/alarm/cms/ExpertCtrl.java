@@ -45,13 +45,8 @@ public class ExpertCtrl {
 	@RequestMapping(value="/select/{page}", method=RequestMethod.GET)
 	public String selectAll(
 			Model model,  
-			@PathVariable(value="page") Integer page,
-			@ModelAttribute("redirect") String redirect
+			@PathVariable(value="page") Integer page
 	){
-		if( redirect != null ){
-			return redirect;
-		}
-		
 		pager(model, page, "id", "desc");
 		
 		return "ExpertView";
@@ -62,13 +57,8 @@ public class ExpertCtrl {
 			Model model,  
 			@PathVariable(value="orderBy") String orderBy,
 			@PathVariable(value="ascend") String ascend,
-			@PathVariable(value="page") Integer page,
-			@ModelAttribute("redirect") String redirect
+			@PathVariable(value="page") Integer page
 	){
-		if( redirect != null ){
-			return redirect;
-		}
-		
 		pager(model, page, orderBy, ascend);
 		
 		return "ExpertView";
@@ -77,13 +67,8 @@ public class ExpertCtrl {
 	@RequestMapping(value="/update/{expert_id}", method=RequestMethod.GET)
 	public String update(
 			Model model, 
-			@PathVariable("expert_id") Integer expert_id,
-			@ModelAttribute("redirect") String redirect
+			@PathVariable("expert_id") Integer expert_id
 	){
-		if( redirect != null ){
-			return redirect;
-		}
-		
 		Expert expert = expertService.selectByPrimaryKey(expert_id);
 		if( expert != null ){
 			model.addAttribute("expert", expert);
@@ -98,13 +83,8 @@ public class ExpertCtrl {
 			Model model, 
 			@PathVariable("expert_id") Integer expert_id,
 			@ModelAttribute("expert") Expert expert,
-			@RequestParam("referrer") String referrer,
-			@ModelAttribute("redirect") String redirect
+			@RequestParam("referrer") String referrer
 	){
-		if( redirect != null ){
-			return redirect;
-		}
-		
 		expert.setId(expert_id);
 		expert.setModifyDate(new Date());
 		if( expertService.updateByPrimaryKey(expert) == 1 ){
@@ -120,13 +100,8 @@ public class ExpertCtrl {
 	@RequestMapping(value="/delete", method=RequestMethod.POST)
 	public String delete(
 			Model model, 
-			@RequestParam("expert_id") Integer expert_id,
-			@ModelAttribute("redirect") String redirect
+			@RequestParam("expert_id") Integer expert_id
 	){
-		if( redirect != null ){
-			return redirect;
-		}
-		
 		Expert expert = expertService.selectByPrimaryKey(expert_id);
 		if( expert != null ){
 			expertService.deleteByPrimaryKey(expert);

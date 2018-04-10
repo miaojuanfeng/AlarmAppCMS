@@ -15,7 +15,7 @@
 										<h1>Exercise <small>Alarm</small></h1>
 									</div>
 									<div class="pull-right">
-										<i class="glyphicon glyphicon-user corpcolor-font"></i> ${user_nickname} (<a href="<c:url value="/cms/user/logout"></c:url>">Logout</a>)
+										<i class="glyphicon glyphicon-user corpcolor-font"></i> ${user_nickname} (<a href="<c:url value="/cms/logout"></c:url>">Logout</a>)
 									</div>
 								</div>
 
