@@ -34,6 +34,9 @@ public class LoginCtrl {
 	public String login(
 			HttpSession httpSession
 	){
+		if( httpSession.getAttribute("user") != null ){
+			return "redirect:/cms/dashboard/select";
+		}
 		
 		return "LoginView";
 	}
@@ -45,6 +48,10 @@ public class LoginCtrl {
 			Model model, 
 			HttpSession httpSession
 	){
+		if( httpSession.getAttribute("user") != null ){
+			return "redirect:/cms/dashboard/select";
+		}
+		
 		String error = null;
 		
 		Config administrator = configService.selectByTitle("Administrator");
