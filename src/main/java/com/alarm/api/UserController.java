@@ -16,7 +16,7 @@ import com.alarm.service.UserService;
 import net.sf.json.JSONObject;
 
 @Controller
-@RequestMapping(value="api/user", produces="text/html;charset=UTF-8")
+@RequestMapping(value="api/user", produces="application/json;charset=UTF-8")
 public class UserController {
 	
 	@Autowired

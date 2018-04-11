@@ -18,7 +18,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 @Controller
-@RequestMapping(value="api/discuss", produces="text/html;charset=UTF-8")
+@RequestMapping(value="api/discuss", produces="application/json;charset=UTF-8")
 public class DiscussController {
 	
 	@Autowired
