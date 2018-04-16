@@ -24,7 +24,16 @@ public class DiscussController {
 	@Autowired
 	private DiscussService discussService;
 	
-	
+	/**
+	 * 获取所有话题
+	 * @URL ${base_url}/api/discuss/select/all
+	 * @method POST
+	 * @param String discuss_order_by
+	 * @param String discuss_ascend
+	 * @param Integer discuss_offset
+	 * @param Integer discuss_page_size
+	 * @return JSON
+	 */
 	@RequestMapping(value="/select/all", method=RequestMethod.POST)
 	@ResponseBody
 	public String select(@RequestParam(value="discuss_order_by", required=false) String discuss_order_by,
@@ -56,6 +65,17 @@ public class DiscussController {
 		return retval.toString();
 	}
 	
+	/**
+	 * 获取与用户有关的话题
+	 * @URL ${base_url}/api/discuss/select/user/{discuss_user_id}
+	 * @method POST
+	 * @param Integer discuss_user_id
+	 * @param String discuss_order_by
+	 * @param String discuss_ascend
+	 * @param Integer discuss_offset
+	 * @param Integer discuss_page_size
+	 * @return JSON
+	 */
 	@RequestMapping(value="/select/user/{discuss_user_id}", method=RequestMethod.POST)
 	@ResponseBody
 	public String select(@PathVariable("discuss_user_id") Integer discuss_user_id,
@@ -88,6 +108,13 @@ public class DiscussController {
 		return retval.toString();
 	}
 	
+	/**
+	 * 获取话题详情
+	 * @URL ${base_url}/api/discuss/select/detail/{discuss_id}
+	 * @method POST
+	 * @param Integer discuss_id
+	 * @return JSON
+	 */
 	@RequestMapping(value="/select/detail/{discuss_id}", method=RequestMethod.POST)
 	@ResponseBody
 	public String select(@PathVariable("discuss_id") Integer discuss_id){
@@ -112,12 +139,12 @@ public class DiscussController {
 	
 	/**
 	 * 创建新话题
-	 * @url ${base_url}/api/discuss/insert
+	 * @URL ${base_url}/api/discuss/insert
 	 * @method POST
 	 * @param String discuss_title
 	 * @param String discuss_content
 	 * @param Integer discuss_user_id
-	 * @return Json
+	 * @return JSON
 	 */
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody

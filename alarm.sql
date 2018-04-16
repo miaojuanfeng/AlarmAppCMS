@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
--- https://www.phpmyadmin.net/
+-- version 4.0.10deb1
+-- http://www.phpmyadmin.net
 --
--- 主機: localhost
--- 產生時間： 2018 年 03 月 11 日 14:23
--- 伺服器版本: 5.6.35
--- PHP 版本： 7.1.1
+-- Host: localhost
+-- Generation Time: Apr 16, 2018 at 05:36 PM
+-- Server version: 5.5.49-0ubuntu0.14.04.1
+-- PHP Version: 5.5.9-1ubuntu4.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,31 +14,32 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
--- 資料庫： `alarm`
+-- Database: `alarm`
 --
 
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `comment`
+-- Table structure for table `comment`
 --
 
-CREATE TABLE `comment` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `comment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `discuss_id` int(11) NOT NULL,
   `comment_id` int(11) NOT NULL,
   `content` longtext NOT NULL,
   `user_id` int(11) NOT NULL,
   `create_date` datetime NOT NULL,
   `modify_date` datetime NOT NULL,
-  `deleted` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `deleted` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- 資料表的匯出資料 `comment`
+-- Dumping data for table `comment`
 --
 
 INSERT INTO `comment` (`id`, `discuss_id`, `comment_id`, `content`, `user_id`, `create_date`, `modify_date`, `deleted`) VALUES
@@ -47,65 +48,72 @@ INSERT INTO `comment` (`id`, `discuss_id`, `comment_id`, `content`, `user_id`, `
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `config`
+-- Table structure for table `config`
 --
 
-CREATE TABLE `config` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `config` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `value` text NOT NULL,
   `create_date` datetime NOT NULL,
   `modify_date` datetime NOT NULL,
-  `deleted` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `deleted` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- 資料表的匯出資料 `config`
+-- Dumping data for table `config`
 --
 
 INSERT INTO `config` (`id`, `title`, `value`, `create_date`, `modify_date`, `deleted`) VALUES
-(1, 'Administrator', '{\"username\":\"dreamover\",\"password\":\"a8d164b0cced436de256e5d92fcacbb3\"}', '2018-01-11 00:00:00', '2018-01-29 18:42:05', 0);
+(1, 'Administrator', '{"username":"dreamover","password":"a8d164b0cced436de256e5d92fcacbb3"}', '2018-01-11 00:00:00', '2018-01-29 18:42:05', 0);
 
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `discuss`
+-- Table structure for table `discuss`
 --
 
-CREATE TABLE `discuss` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `discuss` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `content` longtext NOT NULL,
   `user_id` int(11) NOT NULL,
   `create_date` datetime NOT NULL,
   `modify_date` datetime NOT NULL,
-  `deleted` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `deleted` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
--- 資料表的匯出資料 `discuss`
+-- Dumping data for table `discuss`
 --
 
 INSERT INTO `discuss` (`id`, `title`, `content`, `user_id`, `create_date`, `modify_date`, `deleted`) VALUES
-(1, 'asdasdasdasd12312312213', 'asdasdasdasdasdasdas asdasdsd', 2, '2018-03-11 11:31:36', '2018-03-11 19:57:54', 0);
+(1, '每天什麽時間鍛煉最合適？', '每天什麽時間鍛煉最合適？', 2, '2018-03-11 11:31:36', '2018-04-02 03:28:29', 0),
+(2, 'Nnnn', 'Bbbb', 34, '2018-04-02 15:52:19', '2018-04-02 03:52:19', 0),
+(3, 'sdfsdf', 'dsfsdf', 0, '2018-01-08 17:15:53', '2018-04-02 16:00:00', 0),
+(4, '你好啊', '這是我們的歌', 34, '2018-04-02 06:34:04', '2018-04-02 06:34:04', 0),
+(5, '這個是我的問題', '怎麼辦', 34, '2018-04-02 06:34:33', '2018-04-02 06:34:33', 0);
 
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `expert`
+-- Table structure for table `expert`
 --
 
-CREATE TABLE `expert` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `expert` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `discuss_id` int(11) NOT NULL,
   `content` longtext NOT NULL,
   `create_date` datetime NOT NULL,
   `modify_date` datetime NOT NULL,
-  `deleted` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `deleted` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- 資料表的匯出資料 `expert`
+-- Dumping data for table `expert`
 --
 
 INSERT INTO `expert` (`id`, `discuss_id`, `content`, `create_date`, `modify_date`, `deleted`) VALUES
@@ -114,11 +122,11 @@ INSERT INTO `expert` (`id`, `discuss_id`, `content`, `create_date`, `modify_date
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `user`
+-- Table structure for table `user`
 --
 
-CREATE TABLE `user` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `number` int(11) NOT NULL,
@@ -126,11 +134,12 @@ CREATE TABLE `user` (
   `platform` enum('ios','android') NOT NULL DEFAULT 'ios',
   `create_date` datetime NOT NULL,
   `modify_date` datetime NOT NULL,
-  `deleted` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `deleted` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=35 ;
 
 --
--- 資料表的匯出資料 `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `number`, `nickname`, `platform`, `create_date`, `modify_date`, `deleted`) VALUES
@@ -144,71 +153,8 @@ INSERT INTO `user` (`id`, `username`, `password`, `number`, `nickname`, `platfor
 (31, 'LiangPeiDong', '', 19921030, 'LiangWenKai', 'ios', '2018-03-10 19:01:37', '2018-03-10 19:14:39', 1),
 (32, 'test', '', 123, 'test', 'ios', '2018-03-10 19:03:52', '2018-03-10 19:14:35', 1),
 (33, 'Test', '', 123312, 'MichaelMiao', 'ios', '2018-03-10 19:15:08', '2018-03-10 19:15:08', 0),
-(34, 'miaojuanfeng', 'a6344830655c53c5c6c37b3344a8050e', 1659138950, 'miaojuanfeng', 'ios', '2018-03-11 20:46:47', '2018-03-11 20:46:47', 0);
+(34, 'demo', '25d55ad283aa400af464c76d713c07ad', 1234, 'demo', 'ios', '2018-03-11 20:46:47', '2018-04-06 02:11:09', 0);
 
---
--- 已匯出資料表的索引
---
-
---
--- 資料表索引 `comment`
---
-ALTER TABLE `comment`
-  ADD PRIMARY KEY (`id`);
-
---
--- 資料表索引 `config`
---
-ALTER TABLE `config`
-  ADD PRIMARY KEY (`id`);
-
---
--- 資料表索引 `discuss`
---
-ALTER TABLE `discuss`
-  ADD PRIMARY KEY (`id`);
-
---
--- 資料表索引 `expert`
---
-ALTER TABLE `expert`
-  ADD PRIMARY KEY (`id`);
-
---
--- 資料表索引 `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
-
---
--- 在匯出的資料表使用 AUTO_INCREMENT
---
-
---
--- 使用資料表 AUTO_INCREMENT `comment`
---
-ALTER TABLE `comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- 使用資料表 AUTO_INCREMENT `config`
---
-ALTER TABLE `config`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- 使用資料表 AUTO_INCREMENT `discuss`
---
-ALTER TABLE `discuss`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- 使用資料表 AUTO_INCREMENT `expert`
---
-ALTER TABLE `expert`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- 使用資料表 AUTO_INCREMENT `user`
---
-ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -22,7 +22,17 @@ public class CommentController {
 	@Autowired
 	private CommentService commentService;
 	
-	
+	/**
+	 * 获取评论详情
+	 * @URL ${base_url}/api/comment/select/discuss/{comment_discuss_id}
+	 * @method POST
+	 * @param Integer comment_discuss_id
+	 * @param String comment_order_by
+	 * @param String comment_ascend
+	 * @param Integer comment_offset
+	 * @param Integer comment_page_size
+	 * @return JSON
+	 */
 	@RequestMapping(value="/select/discuss/{comment_discuss_id}", method=RequestMethod.POST)
 	@ResponseBody
 	public String select(@PathVariable("comment_discuss_id") Integer comment_discuss_id,
@@ -54,13 +64,13 @@ public class CommentController {
 	
 	/**
 	 * 添加评论
-	 * @url ${base_url}/api/comment/insert
+	 * @URL ${base_url}/api/comment/insert
 	 * @method POST
 	 * @param Integer comment_discuss_id
 	 * @param Integer comment_comment_id
 	 * @param Integer comment_user_id
 	 * @param String comment_content
-	 * @return Json
+	 * @return JSON
 	 */
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
