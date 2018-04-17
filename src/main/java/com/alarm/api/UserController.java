@@ -41,13 +41,20 @@ public class UserController {
 		JSONObject retval = new JSONObject();
 		
 		//初始化clnt,使用单例方式
-		YunpianClient clnt = new YunpianClient("apikey").init();
+		YunpianClient clnt = new YunpianClient("c3f0061016033114e07424c7531020d5").init();
 		
 		//发送短信API
 		Map<String, String> param = clnt.newParam(2);
-		param.put(YunpianClient.MOBILE, "18616020***");
-		param.put(YunpianClient.TEXT, "【云片网】您的验证码是1234");
+		param.put(YunpianClient.MOBILE, "16607978866");
+		param.put(YunpianClient.TEXT, "【運動鬧鐘】您的驗證碼是2222。如非本人操作，請忽略本短信");
 		Result<SmsSingleSend> r = clnt.sms().single_send(param);
+		
+		System.out.println(r.getCode());
+		System.out.println(r.getMsg());
+		System.out.println(r.getClass());
+		System.out.println(r.getDetail());
+		System.out.println(r.getData());
+		System.out.println(r.getThrowable());
 		
 		clnt.close();
 		
