@@ -1,6 +1,7 @@
 package com.alarm.api;
 
 import java.util.Date;
+import java.util.Map;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alarm.model.User;
 import com.alarm.service.UserService;
+import com.yunpian.sdk.YunpianClient;
+import com.yunpian.sdk.model.Result;
+import com.yunpian.sdk.model.SmsSingleSend;
 
 import net.sf.json.JSONObject;
 
@@ -36,46 +40,57 @@ public class UserController {
 	public String signup(@RequestParam("user_username") String user_username, @RequestParam("user_password") String user_password, @RequestParam("user_platform") String user_platform){
 		JSONObject retval = new JSONObject();
 		
-		User user = userService.selectByUsername(user_username);
-		if( user == null ){
-//			user_password = DigestUtils.md5Hex(user_password);
-	        
-			user = new User();
-			user.setUsername(user_username);
-			user.setPassword(user_password);
-			user.setNickname(user_username);
-			int user_number = 0;
-			while(true){
-				user_number = (int)((Math.random()*9+1)*1000000000);
-				User exist_user = userService.selectByNumber(user_number);
-				if( exist_user == null ){
-					break;
-				}
-			}
-			user.setNumber(user_number);
-			user.setPlatform(user_platform);
-			user.setCreateDate(new Date());
-			user.setModifyDate(new Date());
-			user.setDeleted(0);
-			if( userService.insert(user) == 1 ){
-				JSONObject uJson = new JSONObject();
-				uJson.put("user_id", user.getId());
-				uJson.put("user_username", user.getUsername());
-				uJson.put("user_number", user.getNumber());
-				uJson.put("user_nickname", user.getNickname());
-				uJson.put("user_platform", user.getPlatform());
-				
-				retval.put("status", true);
-				retval.put("data", uJson);
-			}else{
-				retval.put("status", false);
-				retval.put("msg", "User registration failed, please try again later");
-			}
-		}else{
-			retval.put("status", false);
-			retval.put("msg", "The username has been registered");
-		}
+		//初始化clnt,使用单例方式
+		YunpianClient clnt = new YunpianClient("apikey").init();
 		
+		//发送短信API
+		Map<String, String> param = clnt.newParam(2);
+		param.put(YunpianClient.MOBILE, "18616020***");
+		param.put(YunpianClient.TEXT, "【云片网】您的验证码是1234");
+		Result<SmsSingleSend> r = clnt.sms().single_send(param);
+		
+		clnt.close();
+		
+//		User user = userService.selectByUsername(user_username);
+//		if( user == null ){
+////			user_password = DigestUtils.md5Hex(user_password);
+//	        
+//			user = new User();
+//			user.setUsername(user_username);
+//			user.setPassword(user_password);
+//			user.setNickname(user_username);
+//			int user_number = 0;
+//			while(true){
+//				user_number = (int)((Math.random()*9+1)*1000000000);
+//				User exist_user = userService.selectByNumber(user_number);
+//				if( exist_user == null ){
+//					break;
+//				}
+//			}
+//			user.setNumber(user_number);
+//			user.setPlatform(user_platform);
+//			user.setCreateDate(new Date());
+//			user.setModifyDate(new Date());
+//			user.setDeleted(0);
+//			if( userService.insert(user) == 1 ){
+//				JSONObject uJson = new JSONObject();
+//				uJson.put("user_id", user.getId());
+//				uJson.put("user_username", user.getUsername());
+//				uJson.put("user_number", user.getNumber());
+//				uJson.put("user_nickname", user.getNickname());
+//				uJson.put("user_platform", user.getPlatform());
+//				
+//				retval.put("status", true);
+//				retval.put("data", uJson);
+//			}else{
+//				retval.put("status", false);
+//				retval.put("msg", "User registration failed, please try again later");
+//			}
+//		}else{
+//			retval.put("status", false);
+//			retval.put("msg", "The username has been registered");
+//		}
+//		
 		return retval.toString();
 	}
 	

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alarm.model.Comment;
+import com.alarm.model.Discuss;
+import com.alarm.model.User;
 import com.alarm.service.CommentService;
 
 import net.sf.json.JSONArray;
@@ -48,10 +50,10 @@ public class CommentController {
 		for( Comment c : comment ){
 			JSONObject t = new JSONObject();
 			t.put("id", c.getId());
-			t.put("discuss_id", c.getDiscussId());
-			t.put("comment_id", c.getCommentId());
+			t.put("discuss_title", c.getDiscuss().getTitle());
+			t.put("comment_user", c.getComment().getUser().getNickname());
 			t.put("content", c.getContent());
-			t.put("user_id", c.getUserId());
+			t.put("user_nickname", c.getUser().getNickname());
 			t.put("create_date", c.getCreateDate().getTime());
 			temp.add(t);
 		}
@@ -78,9 +80,15 @@ public class CommentController {
 		JSONObject retval = new JSONObject();
 		
 		Comment comment = new Comment();
-		comment.setDiscussId(comment_discuss_id);
-		comment.setCommentId(comment_comment_id);
-		comment.setUserId(comment_user_id);
+		Discuss discuss = new Discuss();
+		discuss.setId(comment_discuss_id);
+		Comment replyComment = new Comment();
+		replyComment.setId(comment_comment_id);
+		User user = new User();
+		user.setId(comment_user_id);
+		comment.setDiscuss(discuss);
+		comment.setComment(replyComment);
+		comment.setUser(user);
 		comment.setContent(comment_content);
 		
 		if( commentService.insert(comment) == 1 ){
