@@ -4,10 +4,10 @@ import java.util.Date;
 
 public class Comment {
 	private Integer id;
-	private Integer discussId;
-	private Integer commentId;
+	private Discuss discuss;
+	private Comment comment;
 	private String content;
-	private Integer userId;
+	private User user;
 	private Date createDate;
 	private Date modifyDate;
 	private Integer deleted;
@@ -17,17 +17,17 @@ public class Comment {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Integer getDiscussId() {
-		return discussId;
+	public Discuss getDiscuss() {
+		return discuss;
 	}
-	public void setDiscussId(Integer discussId) {
-		this.discussId = discussId;
+	public void setDiscuss(Discuss discuss) {
+		this.discuss = discuss;
 	}
-	public Integer getCommentId() {
-		return commentId;
+	public Comment getComment() {
+		return comment;
 	}
-	public void setCommentId(Integer commentId) {
-		this.commentId = commentId;
+	public void setComment(Comment comment) {
+		this.comment = comment;
 	}
 	public String getContent() {
 		return content;
@@ -35,11 +35,11 @@ public class Comment {
 	public void setContent(String content) {
 		this.content = content == null ? null : content.trim();
 	}
-	public Integer getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 	public Date getCreateDate() {
 		return createDate;

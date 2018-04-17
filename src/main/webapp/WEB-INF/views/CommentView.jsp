@@ -105,16 +105,16 @@
 									<div class="col-sm-4 col-xs-12">
 										<h4 class="corpcolor-font">Basic information</h4>
 										<p class="form-group">
-											<label for="discussId">Title <span class="highlight">*</span></label>
-											<form:input id="discussId" path="discussId" type="text" class="form-control input-sm required" placeholder="Title" readonly="true" />
+											<label for="discussTitle">Title <span class="highlight">*</span></label>
+											<form:input id="discussTitle" path="discuss.title" type="text" class="form-control input-sm required" placeholder="Title" readonly="true" />
 										</p>
 										<div class="form-group">
-											<label for="commentId">Reply <span class="highlight">*</span></label>
-											<form:input id="commentId" path="commentId" type="text" class="form-control input-sm required" placeholder="Reply" readonly="true" />
+											<label for="commentUserNickname">Reply <span class="highlight">*</span></label>
+											<form:input id="commentUserNickname" path="comment.user.nickname" type="text" class="form-control input-sm required" placeholder="Reply" readonly="true" />
 										</div>
 										<div class="form-group">
-											<label for="userId">User <span class="highlight">*</span></label>
-											<form:input id="userId" path="userId" type="text" class="form-control input-sm required" placeholder="User" readonly="true" />
+											<label for="userNickname">User <span class="highlight">*</span></label>
+											<form:input id="userNickname" path="user.nickname" type="text" class="form-control input-sm required" placeholder="User" readonly="true" />
 										</div>
 										<div class="form-group">
 											<label for="content">Content <span class="highlight">*</span></label>
@@ -309,9 +309,9 @@
 											<c:forEach items="${comment}" var="item">
 											<tr>
 												<td title="${item.id}">${item.id}</td>
-												<td>${item.userId}</td>
-												<td>${item.commentId}</td>
-												<td>${item.discussId}</td>
+												<td>${item.user.nickname}</td>
+												<td>${item.comment.user.nickname}</td>
+												<td>${item.discuss.title}</td>
 												<td>${item.content}</td>
 												<td><fmt:formatDate  value="${item.createDate}"  pattern="yyyy-MM-dd HH:mm:ss" /></td>
 												<td><fmt:formatDate  value="${item.modifyDate}"  pattern="yyyy-MM-dd HH:mm:ss" /></td>

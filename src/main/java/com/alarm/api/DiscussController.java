@@ -54,7 +54,7 @@ public class DiscussController {
 			JSONObject t = new JSONObject();
 			t.put("id", descuss.getId());
 			t.put("title", descuss.getTitle());
-			t.put("user", descuss.getUser());
+			t.put("user_nickname", descuss.getUser().getNickname());
 			t.put("create_date", descuss.getCreateDate().getTime());
 			temp.add(t);
 		}
@@ -97,7 +97,7 @@ public class DiscussController {
 			JSONObject t = new JSONObject();
 			t.put("id", d.getId());
 			t.put("title", d.getTitle());
-			t.put("user", d.getUser());
+			t.put("user_nickname", d.getUser().getNickname());
 			t.put("create_date", d.getCreateDate().getTime());
 			temp.add(t);
 		}
@@ -127,7 +127,7 @@ public class DiscussController {
 			temp.put("id", discuss.getId());
 			temp.put("title", discuss.getTitle());
 			temp.put("content", discuss.getContent());
-			temp.put("user", discuss.getUser());
+			temp.put("user_nickname", discuss.getUser().getNickname());
 			temp.put("create_date", discuss.getCreateDate().getTime());
 		}
 		

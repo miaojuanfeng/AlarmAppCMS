@@ -25,32 +25,11 @@
     </id>
 
     <property
-        name="discussId"
-        type="int"
-        column="discuss_id"
-        not-null="true"
-        length="10"
-    />
-    <property
-        name="commentId"
-        type="int"
-        column="comment_id"
-        not-null="true"
-        length="10"
-    />
-    <property
         name="content"
         type="java.lang.String"
         column="content"
         not-null="true"
         length="2147483647"
-    />
-    <property
-        name="userId"
-        type="int"
-        column="user_id"
-        not-null="true"
-        length="10"
     />
     <property
         name="createDate"
@@ -75,7 +54,8 @@
     />
 
     <!-- Associations -->
-  
-
+  	<many-to-one name="discuss" unique="true" column="discuss_id" class="com.alarm.model.Discuss" cascade="save-update"></many-to-one>
+  	<many-to-one name="comment" unique="true" column="comment_id" class="com.alarm.model.Comment" cascade="save-update"></many-to-one>
+	<many-to-one name="user" unique="true" column="user_id" class="com.alarm.model.User" cascade="save-update"></many-to-one>
 </class>
 </hibernate-mapping>

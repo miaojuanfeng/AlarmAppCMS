@@ -105,8 +105,8 @@
 									<div class="col-sm-4 col-xs-12">
 										<h4 class="corpcolor-font">Basic information</h4>
 										<p class="form-group">
-											<label for="discussId">Title <span class="highlight">*</span></label>
-											<form:input id="discussId" path="discussId" type="text" class="form-control input-sm required" placeholder="Title" readonly="true" />
+											<label for="discussTitle">Title <span class="highlight">*</span></label>
+											<form:input id="discussTitle" path="discuss.title" type="text" class="form-control input-sm required" placeholder="Title" readonly="true" />
 										</p>
 										<div class="form-group">
 											<label for="content">Content <span class="highlight">*</span></label>

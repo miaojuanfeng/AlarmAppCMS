@@ -28,11 +28,12 @@ public class UserController {
 	 * @method POST
 	 * @param String user_username
 	 * @param String user_password
+	 * @param String user_platform
 	 * @return JSON
 	 */
 	@RequestMapping(value="/signup", method=RequestMethod.POST)
 	@ResponseBody
-	public String signup(@RequestParam("user_username") String user_username, @RequestParam("user_password") String user_password){
+	public String signup(@RequestParam("user_username") String user_username, @RequestParam("user_password") String user_password, @RequestParam("user_platform") String user_platform){
 		JSONObject retval = new JSONObject();
 		
 		User user = userService.selectByUsername(user_username);
@@ -52,7 +53,7 @@ public class UserController {
 				}
 			}
 			user.setNumber(user_number);
-			user.setPlatform("ios");
+			user.setPlatform(user_platform);
 			user.setCreateDate(new Date());
 			user.setModifyDate(new Date());
 			user.setDeleted(0);
