@@ -50,7 +50,7 @@ public class UserController {
 		//发送短信API
 		Map<String, String> param = clnt.newParam(2);
 		param.put(YunpianClient.MOBILE, user_username);
-		param.put(YunpianClient.TEXT, "【運動鬧鐘】您的驗證碼是"+code+"。如非本人操作，請忽略本短信");
+		param.put(YunpianClient.TEXT, "【運動鬧鐘】您的驗證碼是"+code+"。如非本人操作，請忽略本短信。");
 		Result<SmsSingleSend> r = clnt.sms().single_send(param);
 		
 		logger.info(r.getCode());
