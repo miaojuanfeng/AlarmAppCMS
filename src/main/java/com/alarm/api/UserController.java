@@ -53,12 +53,14 @@ public class UserController {
 		param.put(YunpianClient.TEXT, "【運動鬧鐘】您的驗證碼是"+code+"。如非本人操作，請忽略本短信。");
 		Result<SmsSingleSend> r = clnt.sms().single_send(param);
 		
-		logger.info(r.getCode());
-		logger.info(r.getMsg());
-		logger.info(r.getClass());
-		logger.info(r.getDetail());
-		logger.info(r.getData());
-		logger.info(r.getThrowable());
+		if( r.getCode() != 0 ){
+			logger.info("Code: "+r.getCode()+" Detail:"+r.getDetail());
+		}
+//		logger.info(r.getMsg());
+//		logger.info(r.getClass());
+//		logger.info(r.getDetail());
+//		logger.info(r.getData());
+//		logger.info(r.getThrowable());
 		
 		clnt.close();
 		
@@ -77,12 +79,13 @@ public class UserController {
 	 * @method POST
 	 * @param String user_username
 	 * @param String user_password
+	 * @param String user_nickname
 	 * @param String user_platform
 	 * @return JSON
 	 */
 	@RequestMapping(value="/signup", method=RequestMethod.POST)
 	@ResponseBody
-	public String signup(@RequestParam("user_username") String user_username, @RequestParam("user_password") String user_password, @RequestParam("user_platform") String user_platform){
+	public String signup(@RequestParam("user_username") String user_username, @RequestParam("user_password") String user_password, @RequestParam("user_nickname") String user_nickname, @RequestParam("user_platform") String user_platform){
 		JSONObject retval = new JSONObject();
 		
 		User user = userService.selectByUsername(user_username);
@@ -91,21 +94,9 @@ public class UserController {
 	        
 			user = new User();
 			user.setUsername(user_username);
-			user.setPassword(user_password);
-			user.setNickname(user_username);
-			int user_number = 0;
-			while(true){
-				user_number = (int)((Math.random()*9+1)*1000000000);
-				User exist_user = userService.selectByNumber(user_number);
-				if( exist_user == null ){
-					break;
-				}
-			}
-			user.setNumber(user_number);
+			user.setPassword(DigestUtils.md5Hex(user_password));
+			user.setNickname(user_nickname);
 			user.setPlatform(user_platform);
-			user.setCreateDate(new Date());
-			user.setModifyDate(new Date());
-			user.setDeleted(0);
 			if( userService.insert(user) == 1 ){
 				JSONObject uJson = new JSONObject();
 				uJson.put("user_id", user.getId());
