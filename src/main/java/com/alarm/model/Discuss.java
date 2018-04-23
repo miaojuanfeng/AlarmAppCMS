@@ -1,12 +1,15 @@
 package com.alarm.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Discuss {
 	private Integer id;
 	private String title;
 	private String content;
 	private User user;
+	private Expert expert;
+	private List<Comment> comment;
 	private Date createDate;
 	private Date modifyDate;
 	private Integer deleted;
@@ -33,6 +36,18 @@ public class Discuss {
 	}
 	public void setUser(User userId) {
 		this.user = userId;
+	}
+	public Expert getExpert() {
+		return expert;
+	}
+	public void setExpert(Expert expert) {
+		this.expert = expert;
+	}
+	public List<Comment> getComment() {
+		return comment;
+	}
+	public void setComment(List<Comment> comment) {
+		this.comment = comment;
 	}
 	public Date getCreateDate() {
 		return createDate;

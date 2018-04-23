@@ -69,6 +69,12 @@
 
     <!-- Associations -->
   	<many-to-one name="user" unique="true" column="user_id" class="com.alarm.model.User" cascade="save-update"></many-to-one>
-
+	<many-to-one name="expert" unique="true"/>
+	<list name="comment" inverse="true">
+		<key column="discuss_id"></key>
+		<index column="id"/>
+		<one-to-many class="com.alarm.model.Comment"></one-to-many>
+	</list>
+	
 </class>
 </hibernate-mapping>

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alarm.model.Comment;
 import com.alarm.model.Discuss;
 import com.alarm.model.User;
 import com.alarm.service.DiscussService;
@@ -127,8 +128,27 @@ public class DiscussController {
 			temp.put("id", discuss.getId());
 			temp.put("title", discuss.getTitle());
 			temp.put("content", discuss.getContent());
+			JSONArray t = new JSONArray();
+			for(Comment comment : discuss.getComment()){
+				if( comment != null ){
+					JSONObject c = new JSONObject();
+					c.put("id", comment.getId());
+					c.put("user_nickname", comment.getUser().getNickname());
+					c.put("content", comment.getContent());
+					c.put("create_date", comment.getCreateDate().getTime()/1000);
+					t.add(c);
+				}
+			}
+			JSONObject e = new JSONObject();
+			if( discuss.getExpert() != null ){
+				e.put("id", discuss.getExpert().getId());
+				e.put("content", discuss.getExpert().getContent());
+				e.put("create_date", discuss.getExpert().getCreateDate().getTime()/1000);
+			}
+			temp.put("expert", e);
+			temp.put("comment", t);
 			temp.put("user_nickname", discuss.getUser().getNickname());
-			temp.put("create_date", discuss.getCreateDate().getTime());
+			temp.put("create_date", discuss.getCreateDate().getTime()/1000);
 		}
 		
 		retval.put("status", true);

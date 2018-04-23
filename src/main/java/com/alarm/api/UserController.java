@@ -1,6 +1,5 @@
 package com.alarm.api;
 
-import java.util.Date;
 import java.util.Map;
 
 import org.apache.commons.codec.digest.DigestUtils;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alarm.model.User;
-import com.alarm.service.CommentService;
 import com.alarm.service.UserService;
 import com.yunpian.sdk.YunpianClient;
 import com.yunpian.sdk.model.Result;
@@ -156,36 +154,55 @@ public class UserController {
  		return retval.toString();
 	}
 	
-	/**
-	 * 更新用户昵称
-	 * @URL ${base_url}/api/user/update_nickname
-	 * @method POST
-	 * @param Integer user_id
-	 * @param String user_nickname
-	 * @return JSON
-	 */
-	@RequestMapping(value="/update_nickname", method=RequestMethod.POST)
-	@ResponseBody
-	public String update_nickname(@RequestParam("user_id") Integer user_id, @RequestParam("user_nickname") String user_nickname){
-		JSONObject retval = new JSONObject();
-		
-		
-		return retval.toString();
-	}
+//	/**
+//	 * 更新用户昵称
+//	 * @URL ${base_url}/api/user/update_nickname
+//	 * @method POST
+//	 * @param Integer user_id
+//	 * @param String user_nickname
+//	 * @return JSON
+//	 */
+//	@RequestMapping(value="/update_nickname", method=RequestMethod.POST)
+//	@ResponseBody
+//	public String update_nickname(@RequestParam("user_id") Integer user_id, @RequestParam("user_nickname") String user_nickname){
+//		JSONObject retval = new JSONObject();
+//		
+//		
+//		return retval.toString();
+//	}
 	
 	/**
 	 * 更新用户密码
 	 * @URL ${base_url}/api/user/update_password
 	 * @method POST
-	 * @param user_id
-	 * @param user_password
+	 * @param Integer user_id
+	 * @param String user_old_password
+	 * @param String user_password
 	 * @return JSON
 	 */
 	@RequestMapping(value="/update_password", method=RequestMethod.POST)
 	@ResponseBody
-	public String update_password(@RequestParam("user_id") Integer user_id, @RequestParam("user_password") String user_password){
+	public String update_password(@RequestParam("user_id") Integer user_id, @RequestParam("user_old_password") String user_old_password, @RequestParam("user_password") String user_password){
 		JSONObject retval = new JSONObject();
 		
+		User user = userService.selectByPrimaryKey(user_id);
+		if( user != null ){
+			if( user.getPassword().equals(DigestUtils.md5Hex(user_old_password)) ){
+				user.setPassword(DigestUtils.md5Hex(user_password));
+				if( userService.updateByPrimaryKey(user) == 1 ){
+					retval.put("status", true);
+				}else{
+					retval.put("status", false);
+					retval.put("msg", "User password update failed, please try again later");
+				}
+			}else{
+				retval.put("status", false);
+				retval.put("msg", "Wrong old password");
+			}
+		}else{
+			retval.put("status", false);
+			retval.put("msg", "Can not find the user by user_id");
+		}
 		
 		return retval.toString();
 	}
