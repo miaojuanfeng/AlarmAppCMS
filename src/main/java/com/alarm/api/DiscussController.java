@@ -14,6 +14,7 @@ import com.alarm.model.Comment;
 import com.alarm.model.Discuss;
 import com.alarm.model.User;
 import com.alarm.service.DiscussService;
+import com.alarm.service.UserService;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -24,6 +25,9 @@ public class DiscussController {
 	
 	@Autowired
 	private DiscussService discussService;
+	
+	@Autowired
+	private UserService userService;
 	
 	/**
 	 * 获取所有话题
@@ -128,17 +132,6 @@ public class DiscussController {
 			temp.put("id", discuss.getId());
 			temp.put("title", discuss.getTitle());
 			temp.put("content", discuss.getContent());
-			JSONArray t = new JSONArray();
-			for(Comment comment : discuss.getComment()){
-				if( comment != null ){
-					JSONObject c = new JSONObject();
-					c.put("id", comment.getId());
-					c.put("user_nickname", comment.getUser().getNickname());
-					c.put("content", comment.getContent());
-					c.put("create_date", comment.getCreateDate().getTime()/1000);
-					t.add(c);
-				}
-			}
 			JSONObject e = new JSONObject();
 			if( discuss.getExpert() != null ){
 				e.put("id", discuss.getExpert().getId());
@@ -146,6 +139,24 @@ public class DiscussController {
 				e.put("create_date", discuss.getExpert().getCreateDate().getTime()/1000);
 			}
 			temp.put("expert", e);
+			JSONArray t = new JSONArray();
+			if( discuss.getComment() != null ){
+				for(Comment comment : discuss.getComment()){
+					if( comment != null ){
+						JSONObject c = new JSONObject();
+						c.put("id", comment.getId());
+						c.put("user_nickname", comment.getUser().getNickname());
+						if( comment.getComment() != null ){
+							c.put("reply_to_nickname", comment.getComment().getUser().getNickname());
+						}else{
+							c.put("reply_to_nickname", "");
+						}
+						c.put("content", comment.getContent());
+						c.put("create_date", comment.getCreateDate().getTime()/1000);
+						t.add(c);
+					}
+				}
+			}
 			temp.put("comment", t);
 			temp.put("user_nickname", discuss.getUser().getNickname());
 			temp.put("create_date", discuss.getCreateDate().getTime()/1000);
@@ -174,8 +185,7 @@ public class DiscussController {
 		Discuss discuss = new Discuss();
 		discuss.setTitle(discuss_title);
 		discuss.setContent(discuss_content);
-		User user = new User();
-		user.setId(discuss_user_id);
+		User user = userService.selectByPrimaryKey(discuss_user_id);
 		discuss.setUser(user);
 		
 		if( discussService.insert(discuss) == 1 ){
