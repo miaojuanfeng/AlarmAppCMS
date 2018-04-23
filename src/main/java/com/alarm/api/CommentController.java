@@ -89,12 +89,19 @@ public class CommentController {
 		JSONObject retval = new JSONObject();
 		
 		Comment comment = new Comment();
-		Discuss discuss = discussService.selectByPrimaryKey(comment_discuss_id);
+		
+		Discuss discuss = new Discuss();
+		discuss.setId(comment_discuss_id);
+		
 		Comment replyComment = null;
-		if( comment_comment_id != 0 ){
-			replyComment = commentService.selectByPrimaryKey(comment_comment_id);
+		if( comment_comment_id > 0 ){
+			replyComment = new Comment();
+			replyComment.setId(comment_comment_id);
 		}
-		User user = userService.selectByPrimaryKey(comment_user_id);
+		
+		User user = new User();
+		user.setId(comment_user_id);
+		
 		comment.setDiscuss(discuss);
 		comment.setComment(replyComment);
 		comment.setUser(user);

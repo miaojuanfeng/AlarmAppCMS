@@ -14,7 +14,6 @@ import com.alarm.model.Comment;
 import com.alarm.model.Discuss;
 import com.alarm.model.User;
 import com.alarm.service.DiscussService;
-import com.alarm.service.UserService;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -25,9 +24,6 @@ public class DiscussController {
 	
 	@Autowired
 	private DiscussService discussService;
-	
-	@Autowired
-	private UserService userService;
 	
 	/**
 	 * 获取所有话题
@@ -185,7 +181,8 @@ public class DiscussController {
 		Discuss discuss = new Discuss();
 		discuss.setTitle(discuss_title);
 		discuss.setContent(discuss_content);
-		User user = userService.selectByPrimaryKey(discuss_user_id);
+		User user = new User();
+		user.setId(discuss_user_id);
 		discuss.setUser(user);
 		
 		if( discussService.insert(discuss) == 1 ){

@@ -54,8 +54,8 @@
     />
 
     <!-- Associations -->
-  	<many-to-one name="discuss" unique="true" column="discuss_id" class="com.alarm.model.Discuss" cascade="save-update"></many-to-one>
-  	<many-to-one name="comment" unique="true" column="comment_id" class="com.alarm.model.Comment" cascade="save-update"></many-to-one>
-	<many-to-one name="user" unique="true" column="user_id" class="com.alarm.model.User" cascade="save-update"></many-to-one>
+  	<many-to-one name="discuss" unique="true" column="discuss_id" class="com.alarm.model.Discuss" cascade="none"></many-to-one>
+  	<many-to-one name="comment" unique="true" column="comment_id" class="com.alarm.model.Comment" cascade="none"></many-to-one>
+	<many-to-one name="user" unique="true" column="user_id" class="com.alarm.model.User" cascade="none"></many-to-one>
 </class>
 </hibernate-mapping>
