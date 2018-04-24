@@ -21,3 +21,5 @@ POST http://104.236.150.123:8080/ExerciseAlarmCMS/api/discuss/select/user/34
 discuss_offset=0
 discuss_page_size=20
 
+获取话题详情
+POST http://104.236.150.123:8080/ExerciseAlarmCMS/api/discuss/select/detail/1

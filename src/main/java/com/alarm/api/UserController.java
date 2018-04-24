@@ -1,5 +1,9 @@
 package com.alarm.api;
 
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.codec.digest.DigestUtils;
@@ -11,12 +15,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alarm.model.Star;
 import com.alarm.model.User;
+import com.alarm.service.FuncService;
+import com.alarm.service.StarService;
 import com.alarm.service.UserService;
 import com.yunpian.sdk.YunpianClient;
 import com.yunpian.sdk.model.Result;
 import com.yunpian.sdk.model.SmsSingleSend;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 @Controller
@@ -27,6 +35,12 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private StarService starService;
+	
+	@Autowired
+	private FuncService funcService;
 	
 	/**
 	 * 获取验证码
@@ -205,6 +219,114 @@ public class UserController {
 		}else{
 			retval.put("status", false);
 			retval.put("msg", "Can not find the user by user_id");
+		}
+		
+		return retval.toString();
+	}
+	
+	@RequestMapping(value="/user_star", method=RequestMethod.POST)
+	@ResponseBody
+	public String user_star(@RequestParam("user_id") Integer user_id){
+		JSONObject retval = new JSONObject();
+		
+		List<Star> stars = starService.selectAllByWeek();
+		JSONArray starArr = new JSONArray();
+		for(Star star : stars){
+			JSONObject t = new JSONObject();
+			t.put("id", star.getId());
+			t.put("user_nickname", star.getUser().getNickname());
+			t.put("star_num", star.getStarNum());
+			t.put("like_num", star.getLikeNum());
+			String userIds = star.getLikeUser();
+			if( !userIds.equals("") && funcService.getItemIndexOfArray(userIds.split(","), String.valueOf(user_id)) != -1 ){
+				t.put("is_like", true);
+			}else{
+				t.put("is_like", false);
+			}
+			starArr.add(t);
+		}
+		
+		retval.put("status", true);
+		retval.put("data", starArr);
+		return retval.toString();
+	}
+	
+	@RequestMapping(value="/user_like", method=RequestMethod.POST)
+	@ResponseBody
+	public String user_like(@RequestParam("star_id") Integer star_id, @RequestParam("user_id") Integer user_id){
+		JSONObject retval = new JSONObject();
+		
+		Star star = starService.selectByPrimaryKey(star_id);
+		if( star != null ){
+			String userIds = star.getLikeUser();
+			// do Unlike
+			JSONObject t = new JSONObject();
+			if( !userIds.equals("") && funcService.getItemIndexOfArray(userIds.split(","), String.valueOf(user_id)) != -1 ){
+				List<String> list = new LinkedList<String>();
+				for(String s : Arrays.asList(userIds.split(","))){
+					list.add(s);
+				}
+				list.remove(String.valueOf(user_id));
+				String[] user = list.toArray(new String[0]);
+				star.setLikeUser(String.join(",", user));
+				star.setLikeNum(star.getLikeNum()-1);
+				
+				t.put("is_like", false);
+			}else{
+				List<String> list = new LinkedList<String>();
+				for(String s : Arrays.asList(userIds.split(","))){
+					list.add(s);
+				}
+				list.add(String.valueOf(user_id));
+				String[] user = list.toArray(new String[0]);
+				star.setLikeUser(String.join(",", user));
+				star.setLikeNum(star.getLikeNum()+1);
+				
+				t.put("is_like", true);
+			}
+			if( starService.updateByPrimaryKey(star) == 1 ){
+				retval.put("status", true);
+				retval.put("data", t);
+			}
+		}else{
+			retval.put("status", false);
+			retval.put("msg", "找不到該用戶");
+		}
+		
+		return retval.toString();
+	}
+	
+	@RequestMapping(value="/upload_star", method=RequestMethod.POST)
+	@ResponseBody
+	public String upload_star(@RequestParam("user_id") Integer user_id, @RequestParam("star_num") Integer star_num){
+		JSONObject retval = new JSONObject();
+		
+		Star star = starService.selectByUserId(user_id);
+		Calendar calendar = Calendar.getInstance();
+		int week = calendar.get(Calendar.WEEK_OF_YEAR);
+		if( star != null ){
+			if( week != star.getWeek() ){
+				star.setWeek(week);
+				star.setLikeNum(0);
+				star.setLikeUser("");
+			}
+			star.setStarNum(star_num);
+			if( starService.updateByPrimaryKey(star) == 1 ){
+				retval.put("status", true);
+			}
+		}else{
+			star = new Star();
+			User user = new User();
+			user.setId(user_id);
+			
+			star.setUser(user);
+			star.setWeek(week);
+			star.setLikeNum(0);
+			star.setLikeUser("");
+			star.setStarNum(star_num);
+			if( starService.insert(star) == 1 ){
+				retval.put("status", true);
+			}
 		}
 		
 		return retval.toString();

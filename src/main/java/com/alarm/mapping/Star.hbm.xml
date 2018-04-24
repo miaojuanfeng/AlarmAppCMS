@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+    
+<hibernate-mapping>
+<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+
+<class 
+    name="com.alarm.model.Star" 
+    table="star"
+>
+
+    <id
+        name="id"
+        type="java.lang.Integer"
+        column="id"
+    >
+        <generator class="increment" />
+    </id>
+    
+    <property
+        name="week"
+        type="int"
+        column="week"
+        not-null="true"
+        length="10"
+    />
+    <property
+        name="starNum"
+        type="int"
+        column="star_num"
+        not-null="true"
+        length="10"
+    />
+    <property
+        name="likeNum"
+        type="int"
+        column="like_num"
+        not-null="true"
+        length="10"
+    />
+    
+    <property
+        name="likeUser"
+        type="java.lang.String"
+        column="like_user"
+        not-null="false"
+        length="2147483647"
+    />
+    
+    <property
+        name="createDate"
+        type="java.sql.Timestamp"
+        column="create_date"
+        not-null="true"
+        length="19"
+    />
+    <property
+        name="modifyDate"
+        type="java.sql.Timestamp"
+        column="modify_date"
+        not-null="true"
+        length="19"
+    />
+    <property
+        name="deleted"
+        type="int"
+        column="deleted"
+        not-null="true"
+        length="10"
+    />
+
+    <!-- Associations -->
+  	<many-to-one name="user" unique="true" column="user_id" class="com.alarm.model.User" cascade="none"></many-to-one>
+
+</class>
+</hibernate-mapping>
