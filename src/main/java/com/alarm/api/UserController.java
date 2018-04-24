@@ -53,6 +53,15 @@ public class UserController {
 		
 		if( r.getCode() != 0 ){
 			logger.info("Code: "+r.getCode()+" Detail:"+r.getDetail());
+			
+			retval.put("status", false);
+			retval.put("msg", r.getDetail());
+		}else{
+			retval.put("status", true);
+			
+			JSONObject temp = new JSONObject();
+			temp.put("verify_code", verifyCode);
+			retval.put("data", temp);
 		}
 //		logger.info(r.getMsg());
 //		logger.info(r.getClass());
@@ -61,12 +70,6 @@ public class UserController {
 //		logger.info(r.getThrowable());
 		
 		clnt.close();
-		
-		retval.put("status", true);
-		
-		JSONObject temp = new JSONObject();
-		temp.put("verify_code", verifyCode);
-		retval.put("data", temp);
 		
 		return retval.toString();
 	}
