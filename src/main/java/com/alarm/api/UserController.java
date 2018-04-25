@@ -44,9 +44,11 @@ public class UserController {
 	
 	/**
 	 * 获取验证码
-	 * @param user_username
-	 * @param user_platform
-	 * @return
+	 * @URL ${base_url}/api/user/verify
+	 * @method POST
+	 * @param String user_username
+	 * @param String user_platform
+	 * @return JSON
 	 */
 	@RequestMapping(value="/verify", method=RequestMethod.POST)
 	@ResponseBody
@@ -224,6 +226,13 @@ public class UserController {
 		return retval.toString();
 	}
 	
+	/**
+	 * 获取星星排名
+	 * @URL ${base_url}/api/user/user_star
+	 * @method POST
+	 * @param Integer user_id
+	 * @return JSON
+	 */
 	@RequestMapping(value="/user_star", method=RequestMethod.POST)
 	@ResponseBody
 	public String user_star(@RequestParam("user_id") Integer user_id){
@@ -262,6 +271,14 @@ public class UserController {
 		return retval.toString();
 	}
 	
+	/**
+	 * 用户点击赞
+	 * @URL ${base_url}/api/user/user_like
+	 * @method POST
+	 * @param Integer star_id
+	 * @param Integer user_id
+	 * @return JSON
+	 */
 	@RequestMapping(value="/user_like", method=RequestMethod.POST)
 	@ResponseBody
 	public String user_like(@RequestParam("star_id") Integer star_id, @RequestParam("user_id") Integer user_id){
@@ -307,6 +324,14 @@ public class UserController {
 		return retval.toString();
 	}
 	
+	/**
+	 * 上传用户星星
+	 * @URL ${base_url}/api/user/upload_star
+	 * @method POST
+	 * @param Integer user_id
+	 * @param Integer star_num
+	 * @return JSON
+	 */
 	@RequestMapping(value="/upload_star", method=RequestMethod.POST)
 	@ResponseBody
 	public String upload_star(@RequestParam("user_id") Integer user_id, @RequestParam("star_num") Integer star_num){
