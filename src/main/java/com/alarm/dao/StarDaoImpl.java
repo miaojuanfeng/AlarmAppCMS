@@ -87,7 +87,7 @@ public class StarDaoImpl implements StarDao {
 
 	public List<Star> selectAll(Integer week) {
 		// TODO Auto-generated method stub
-		String hql = "from Star where deleted=0 and week="+week;
+		String hql = "from Star where deleted=0 and week="+week+" order by star_num desc";
 		Query query = getSession().createQuery(hql);
         return (List<Star>)query.list();
 	}

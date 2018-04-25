@@ -231,7 +231,9 @@ public class UserController {
 		
 		List<Star> stars = starService.selectAllByWeek();
 		JSONArray starArr = new JSONArray();
-		for(Star star : stars){
+		int userNo = 0;
+		for(int i=0; i<stars.size(); i++){
+			Star star = stars.get(i);
 			JSONObject t = new JSONObject();
 			t.put("id", star.getId());
 			t.put("user_nickname", star.getUser().getNickname());
@@ -244,10 +246,19 @@ public class UserController {
 				t.put("is_like", false);
 			}
 			starArr.add(t);
+			if( star.getUser().getId() == user_id ){
+				userNo = i+1;
+				break;
+			}
 		}
 		
+		JSONObject data = new JSONObject();
+		data.put("user_no", userNo);
+		data.put("star_total", starArr.size());
+		data.put("star_list", starArr);
+		
 		retval.put("status", true);
-		retval.put("data", starArr);
+		retval.put("data", data);
 		return retval.toString();
 	}
 	
