@@ -53,6 +53,19 @@
         length="255"
     />
     <property
+        name="unread"
+        type="int"
+        column="unread"
+        not-null="true"
+        length="10"
+    />
+    <property
+        name="data"
+        type="java.lang.String"
+        column="data"
+        not-null="true"
+    />
+    <property
         name="platform"
         type="java.lang.String"
         column="platform"

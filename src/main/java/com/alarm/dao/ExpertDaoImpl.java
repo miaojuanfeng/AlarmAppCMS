@@ -76,7 +76,7 @@ public class ExpertDaoImpl implements ExpertDao {
 			hql="from Expert where deleted=0";
 		}
 		Query query = getSession().createQuery(hql);
-		if( offset >= -1 ){
+		if( offset > -1 ){
 			query.setFirstResult(offset);
 		}
 		if( pageSize > 0 ){

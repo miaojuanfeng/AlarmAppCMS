@@ -76,7 +76,7 @@ public class CommentDaoImpl implements CommentDao {
 			hql="from Comment where deleted=0";
 		}
 		Query query = getSession().createQuery(hql);
-		if( offset >= -1 ){
+		if( offset > -1 ){
 			query.setFirstResult(offset);
 		}
 		if( pageSize > 0 ){
@@ -94,7 +94,7 @@ public class CommentDaoImpl implements CommentDao {
 			hql="from Comment where deleted=0 and discuss_id = " + DiscussId;
 		}
 		Query query = getSession().createQuery(hql);
-		if( offset >= -1 ){
+		if( offset > -1 ){
 			query.setFirstResult(offset);
 		}
 		if( pageSize > 0 ){

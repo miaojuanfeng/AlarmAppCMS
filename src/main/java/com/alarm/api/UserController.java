@@ -157,6 +157,8 @@ public class UserController {
 				uJson.put("user_username", user.getUsername());
 				uJson.put("user_number", user.getNumber());
 				uJson.put("user_nickname", user.getNickname());
+				uJson.put("user_unread", user.getUnread());
+				uJson.put("user_data", user.getData());
 				uJson.put("user_platform", user.getPlatform());
 				
 				retval.put("status", true);

@@ -14,6 +14,7 @@ import com.alarm.model.Comment;
 import com.alarm.model.Discuss;
 import com.alarm.model.User;
 import com.alarm.service.DiscussService;
+import com.alarm.service.UserService;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -24,6 +25,9 @@ public class DiscussController {
 	
 	@Autowired
 	private DiscussService discussService;
+	
+	@Autowired
+	private UserService userService;
 	
 	/**
 	 * 获取所有话题
@@ -56,7 +60,7 @@ public class DiscussController {
 			t.put("id", descuss.getId());
 			t.put("title", descuss.getTitle());
 			t.put("user_nickname", descuss.getUser().getNickname());
-			t.put("create_date", descuss.getCreateDate().getTime());
+			t.put("create_date", descuss.getCreateDate().getTime()/1000);
 			temp.add(t);
 		}
 		
@@ -99,9 +103,13 @@ public class DiscussController {
 			t.put("id", d.getId());
 			t.put("title", d.getTitle());
 			t.put("user_nickname", d.getUser().getNickname());
-			t.put("create_date", d.getCreateDate().getTime());
+			t.put("create_date", d.getCreateDate().getTime()/1000);
 			temp.add(t);
 		}
+		
+		User user = new User();
+		user.setId(discuss_user_id);
+		userService.clearUnread(user);
 		
 		retval.put("status", true);
 		retval.put("data", temp);

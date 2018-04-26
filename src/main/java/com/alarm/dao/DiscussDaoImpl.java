@@ -69,14 +69,12 @@ public class DiscussDaoImpl implements DiscussDao {
 
 	public List<Discuss> selectAll(String orderBy, String ascend, int offset, int pageSize) {
 		// TODO Auto-generated method stub
-		String hql = "";
+		String hql = "from Discuss where deleted=0";
 		if( orderBy != null && ascend != null ){
-			hql="from Discuss where deleted=0 order by " + orderBy + " " + ascend;
-		}else{
-			hql="from Discuss where deleted=0";
+			hql = hql + " order by " + orderBy + " " + ascend;
 		}
 		Query query = getSession().createQuery(hql);
-		if( offset >= -1 ){
+		if( offset > -1 ){
 			query.setFirstResult(offset);
 		}
 		if( pageSize > 0 ){
@@ -87,14 +85,12 @@ public class DiscussDaoImpl implements DiscussDao {
 	
 	public List<Discuss> selectByUser(Integer user_id, String orderBy, String ascend, int offset, int pageSize) {
 		// TODO Auto-generated method stub
-		String hql = "";
+		String hql = "from Discuss d where deleted=0 and (d.user.id = " + user_id + "or d.id in (select c.discuss.id from Comment c where c.comment.user.id = "+user_id+" or c.user.id = "+user_id+")) group by d.id";
 		if( orderBy != null && ascend != null ){
-			hql="from Discuss where deleted=0 and user_id = " + user_id + " order by " + orderBy + " " + ascend;
-		}else{
-			hql="from Discuss where deleted=0 and user_id = " + user_id;
+			hql = hql + " order by " + orderBy + " " + ascend;
 		}
 		Query query = getSession().createQuery(hql);
-		if( offset >= -1 ){
+		if( offset > -1 ){
 			query.setFirstResult(offset);
 		}
 		if( pageSize > 0 ){

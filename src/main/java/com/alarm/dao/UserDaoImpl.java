@@ -50,7 +50,7 @@ public class UserDaoImpl implements UserDao {
 			hql="from User where deleted=0";
 		}
 		Query query = getSession().createQuery(hql);
-		if( offset >= -1 ){
+		if( offset > -1 ){
 			query.setFirstResult(offset);
 		}
 		if( pageSize > 0 ){
@@ -103,6 +103,21 @@ public class UserDaoImpl implements UserDao {
         	return (User)query.uniqueResult();
         }
         return null;
+	}
+	
+	public int increUnread(User user){
+		String hql="update User set unread=unread+1 where deleted=0 and id=:id";
+		Query query = getSession().createQuery(hql);
+		query.setProperties(user);
+        return query.executeUpdate();
+	}
+
+	public int clearUnread(User user) {
+		// TODO Auto-generated method stub
+		String hql="update User set unread=0 where deleted=0 and id=:id";
+		Query query = getSession().createQuery(hql);
+		query.setProperties(user);
+        return query.executeUpdate();
 	}
 
 }

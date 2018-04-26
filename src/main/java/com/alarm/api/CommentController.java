@@ -90,13 +90,17 @@ public class CommentController {
 		
 		Comment comment = new Comment();
 		
-		Discuss discuss = new Discuss();
-		discuss.setId(comment_discuss_id);
+		Discuss discuss = discussService.selectByPrimaryKey(comment_discuss_id);
+		if( discuss.getUser().getId() != comment_user_id ){
+			userService.increUnread(discuss.getUser());
+		}
 		
 		Comment replyComment = null;
 		if( comment_comment_id > 0 ){
-			replyComment = new Comment();
-			replyComment.setId(comment_comment_id);
+			replyComment = commentService.selectByPrimaryKey(comment_comment_id);
+			if( replyComment.getUser().getId() != comment_user_id ){
+				userService.increUnread(replyComment.getUser());
+			}
 		}
 		
 		User user = new User();

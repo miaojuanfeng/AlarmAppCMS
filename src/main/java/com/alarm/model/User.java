@@ -13,6 +13,10 @@ public class User {
     private Integer number;
 
     private String nickname;
+    
+    private Integer unread;
+    
+    private String data;
 
     private String platform;
 
@@ -64,7 +68,23 @@ public class User {
         this.nickname = nickname == null ? null : nickname.trim();
     }
 
-    public String getPlatform() {
+    public Integer getUnread() {
+		return unread;
+	}
+
+	public void setUnread(Integer unread) {
+		this.unread = unread;
+	}
+
+	public String getData() {
+		return data;
+	}
+
+	public void setData(String data) {
+		this.data = data;
+	}
+
+	public String getPlatform() {
         return platform;
     }
 

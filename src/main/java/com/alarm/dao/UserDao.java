@@ -13,4 +13,6 @@ public interface UserDao {
 	List<User> selectAll(String orderBy, String ascend, int offset, int pageSize);
 	User selectByUsername(String username);
 	User selectByNumber(Integer number);
+	int increUnread(User user);
+	int clearUnread(User user);
 }

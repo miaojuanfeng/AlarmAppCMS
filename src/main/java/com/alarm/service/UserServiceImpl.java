@@ -71,4 +71,14 @@ public class UserServiceImpl implements UserService {
 		return userDao.selectByNumber(number);
 	}
 
+	public int increUnread(User user) {
+		// TODO Auto-generated method stub
+		return userDao.increUnread(user);
+	}
+
+	public int clearUnread(User user) {
+		// TODO Auto-generated method stub
+		return userDao.clearUnread(user);
+	}
+
 }
