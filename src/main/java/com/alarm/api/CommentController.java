@@ -103,8 +103,7 @@ public class CommentController {
 			}
 		}
 		
-		User user = new User();
-		user.setId(comment_user_id);
+		User user = userService.selectByPrimaryKey(comment_user_id);
 		
 		comment.setDiscuss(discuss);
 		comment.setComment(replyComment);
@@ -113,6 +112,19 @@ public class CommentController {
 		
 		if( commentService.insert(comment) == 1 ){
 			retval.put("status", true);
+			
+			JSONObject c = new JSONObject();
+			c.put("id", comment.getId());
+			c.put("user_nickname", comment.getUser().getNickname());
+			if( comment.getComment() != null ){
+				c.put("reply_to_nickname", comment.getComment().getUser().getNickname());
+			}else{
+				c.put("reply_to_nickname", "");
+			}
+			c.put("content", comment.getContent());
+			c.put("create_date", comment.getCreateDate().getTime()/1000);
+			
+			retval.put("data", c);
 		}else{
 			retval.put("status", false);
 		}
