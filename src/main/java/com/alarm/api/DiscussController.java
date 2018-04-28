@@ -41,17 +41,12 @@ public class DiscussController {
 	 */
 	@RequestMapping(value="/select/all", method=RequestMethod.POST)
 	@ResponseBody
-	public String select(@RequestParam(value="discuss_order_by", required=false) String discuss_order_by,
-						@RequestParam(value="discuss_ascend", required=false) String discuss_ascend,
+	public String select(@RequestParam(value="discuss_order_by", required=false, defaultValue="id") String discuss_order_by,
+						@RequestParam(value="discuss_ascend", required=false, defaultValue="desc") String discuss_ascend,
 						@RequestParam("discuss_offset") Integer discuss_offset,
 						@RequestParam("discuss_page_size") Integer discuss_page_size){
 		JSONObject retval = new JSONObject();
 		JSONArray temp = new JSONArray();
-		
-		if( discuss_order_by == null || discuss_ascend == null || discuss_order_by.equals("") || discuss_ascend.equals("") ){
-			discuss_order_by = "id";
-			discuss_ascend = "desc";
-		}
 		
 		List<Discuss> discusses = discussService.selectAll(discuss_order_by, discuss_ascend, discuss_offset, discuss_page_size);
 	
@@ -84,17 +79,12 @@ public class DiscussController {
 	@RequestMapping(value="/select/user/{discuss_user_id}", method=RequestMethod.POST)
 	@ResponseBody
 	public String select(@PathVariable("discuss_user_id") Integer discuss_user_id,
-						@RequestParam(value="discuss_order_by", required=false) String discuss_order_by,
-						@RequestParam(value="discuss_ascend", required=false) String discuss_ascend,
+						@RequestParam(value="discuss_order_by", required=false, defaultValue="id") String discuss_order_by,
+						@RequestParam(value="discuss_ascend", required=false, defaultValue="desc") String discuss_ascend,
 						@RequestParam("discuss_offset") Integer discuss_offset,
 						@RequestParam("discuss_page_size") Integer discuss_page_size){
 		JSONObject retval = new JSONObject();
 		JSONArray temp = new JSONArray();
-		
-		if( discuss_order_by == null || discuss_ascend == null || discuss_order_by.equals("") || discuss_ascend.equals("") ){
-			discuss_order_by = "id";
-			discuss_ascend = "desc";
-		}
 		
 		List<Discuss> discuss = discussService.selectByUser(discuss_user_id, discuss_order_by, discuss_ascend, discuss_offset, discuss_page_size);
 	
