@@ -158,7 +158,7 @@ public class UserController {
 				uJson.put("user_number", user.getNumber());
 				uJson.put("user_nickname", user.getNickname());
 				uJson.put("user_unread", user.getUnread());
-				uJson.put("user_data", user.getData());
+//				uJson.put("user_data", user.getData());
 				uJson.put("user_platform", user.getPlatform());
 				
 				retval.put("status", true);
@@ -365,6 +365,32 @@ public class UserController {
 			if( starService.insert(star) == 1 ){
 				retval.put("status", true);
 			}
+		}
+		
+		return retval.toString();
+	}
+	
+	/**
+	 * 上传用户数据
+	 * @param user_id
+	 * @param user_data
+	 * @return
+	 */
+	@RequestMapping(value="/upload_data", method=RequestMethod.POST)
+	@ResponseBody
+	public String upload_data(@RequestParam("user_id") Integer user_id, @RequestParam("user_data") String user_data){
+		JSONObject retval = new JSONObject();
+		
+		User user = userService.selectByPrimaryKey(user_id);
+		if( user != null ){
+			user.setData(user_data);
+			if( userService.updateByPrimaryKey(user) == 1 ){
+				retval.put("status", true);
+			}else{
+				retval.put("status", false);
+			}
+		}else{
+			retval.put("status", false);
 		}
 		
 		return retval.toString();
