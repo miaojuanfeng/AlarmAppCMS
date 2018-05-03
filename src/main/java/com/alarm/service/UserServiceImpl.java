@@ -47,6 +47,8 @@ public class UserServiceImpl implements UserService {
 			}
 		}
 		user.setNumber(user_number);
+		user.setUnread(0);
+		user.setData("");
 		Date date = new Date();
 		user.setCreateDate(date);
 		user.setModifyDate(date);

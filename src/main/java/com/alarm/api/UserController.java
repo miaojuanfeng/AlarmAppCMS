@@ -126,11 +126,11 @@ public class UserController {
 				retval.put("data", uJson);
 			}else{
 				retval.put("status", false);
-				retval.put("msg", "User registration failed, please try again later");
+				retval.put("msg", "用戶註冊失敗, 請稍後再試");
 			}
 		}else{
 			retval.put("status", false);
-			retval.put("msg", "The username has been registered");
+			retval.put("msg", "該用戶已註冊");
 		}
 		
 		return retval.toString();
@@ -165,11 +165,11 @@ public class UserController {
 				retval.put("data", uJson);
 			}else{
 				retval.put("status", false);
-				retval.put("msg", "Incorrect user password");
+				retval.put("msg", "密碼不正確");
 			}
 		}else{
 			retval.put("status", false);
-			retval.put("msg", "Unable to find the user");
+			retval.put("msg", "找不到該用戶");
  		}
  		
  		return retval.toString();
@@ -214,15 +214,15 @@ public class UserController {
 					retval.put("status", true);
 				}else{
 					retval.put("status", false);
-					retval.put("msg", "User password update failed, please try again later");
+					retval.put("msg", "更新用戶密碼失敗, 請稍後再試");
 				}
 			}else{
 				retval.put("status", false);
-				retval.put("msg", "Wrong old password");
+				retval.put("msg", "舊密碼不正確");
 			}
 		}else{
 			retval.put("status", false);
-			retval.put("msg", "Can not find the user by user_id");
+			retval.put("msg", "找不到該用戶");
 		}
 		
 		return retval.toString();
