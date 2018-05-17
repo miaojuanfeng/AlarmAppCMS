@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.alarm.model.Discuss;
 import com.alarm.model.Expert;
+import com.alarm.service.DiscussService;
 import com.alarm.service.ExpertService;
 import com.alarm.service.FuncService;
 
@@ -28,6 +30,9 @@ public class ExpertCtrl {
 	
 	@Autowired
 	private ExpertService expertService;
+	
+	@Autowired
+	private DiscussService discussService;
 	
 	@RequestMapping(value="/select", method=RequestMethod.GET)
 	public String selectAll(){
@@ -60,6 +65,47 @@ public class ExpertCtrl {
 			@PathVariable(value="page") Integer page
 	){
 		pager(model, page, orderBy, ascend);
+		
+		return "ExpertView";
+	}
+	
+	@RequestMapping(value="/insert/{discuss_id}", method=RequestMethod.GET)
+	public String insert(
+			Model model, 
+			@PathVariable("discuss_id") Integer discuss_id
+	){
+		Expert expert = expertService.selectByDiscussId(discuss_id);
+		if( expert != null ){
+			return "redirect:/cms/expert/update/"+expert.getId();
+		}
+		Discuss discuss = discussService.selectByPrimaryKey(discuss_id);
+		if( discuss != null ){
+			expert = new Expert();
+			expert.setDiscuss(discuss);
+			model.addAttribute("expert", expert);
+			return "ExpertView";
+		}
+		return "redirect:/cms/expert/select";
+	}
+	
+	@RequestMapping(value="/insert/{discuss_id}", method=RequestMethod.POST)
+	public String insert(
+			Model model, 
+			@PathVariable("discuss_id") Integer discuss_id,
+			@ModelAttribute("expert") Expert expert,
+			@RequestParam("referrer") String referrer
+	){
+		Discuss discuss = discussService.selectByPrimaryKey(discuss_id);
+		if( discuss != null ){
+			expert.setDiscuss(discuss);
+			expert.setModifyDate(new Date());
+			if( expertService.insert(expert) == 1 ){
+				if( referrer != "" ){
+					return "redirect:"+referrer.substring(referrer.lastIndexOf("/cms/"));
+				}
+				return "redirect:/cms/expert/select";
+			}
+		}
 		
 		return "ExpertView";
 	}

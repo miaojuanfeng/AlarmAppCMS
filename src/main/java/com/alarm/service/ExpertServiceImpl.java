@@ -52,4 +52,9 @@ public class ExpertServiceImpl implements ExpertService {
 		return expertDao.selectAll(orderBy, ascend, offset, pageSize);
 	}
 
+	public Expert selectByDiscussId(Integer discussId) {
+		// TODO Auto-generated method stub
+		return expertDao.selectByDiscussId(discussId);
+	}
+
 }

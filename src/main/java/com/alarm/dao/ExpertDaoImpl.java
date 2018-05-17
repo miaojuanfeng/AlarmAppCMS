@@ -85,4 +85,14 @@ public class ExpertDaoImpl implements ExpertDao {
         return (List<Expert>)query.list();
 	}
 
+	public Expert selectByDiscussId(Integer discussId) {
+		// TODO Auto-generated method stub
+		String hql="from Expert where deleted=0 and discuss_id=?0";
+        Query query = getSession().createQuery(hql).setInteger("0", discussId);
+        if( query != null ){
+        	return (Expert)query.uniqueResult();
+        }
+        return null;
+	}
+
 }

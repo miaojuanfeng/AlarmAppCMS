@@ -302,6 +302,7 @@
 													</a>
 												</th>
 												<th width="40"></th>
+												<th width="40"></th>
 												<th width="40" class="text-right">
 													<%-- <a href="<c:url value="/cms/${classLower}/insert"></c:url>" data-toggle="tooltip" title="Insert">
 														<i class="glyphicon glyphicon-plus"></i>
@@ -318,6 +319,11 @@
 												<td>${item.user.nickname}</td>
 												<td><fmt:formatDate  value="${item.createDate}"  pattern="yyyy-MM-dd HH:mm:ss" /></td>
 												<td><fmt:formatDate  value="${item.modifyDate}"  pattern="yyyy-MM-dd HH:mm:ss" /></td>
+												<td class="text-right">
+													<a href="<c:url value="/cms/expert/insert/${item.id}"></c:url>" data-toggle="tooltip" title="Expert">
+														<i class="glyphicon glyphicon-user"></i>
+													</a>
+												</td>
 												<td class="text-right">
 													<a href="<c:url value="/cms/${classLower}/update/${item.id}"></c:url>" data-toggle="tooltip" title="Update">
 														<i class="glyphicon glyphicon-edit"></i>

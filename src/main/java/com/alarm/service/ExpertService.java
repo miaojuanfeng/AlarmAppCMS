@@ -6,6 +6,7 @@ import com.alarm.model.Expert;
 
 public interface ExpertService {
 	Expert selectByPrimaryKey(Integer id);
+	Expert selectByDiscussId(Integer discussId);
 	int insert(Expert expert);
 	int updateByPrimaryKey(Expert expert);
 	int deleteByPrimaryKey(Expert expert);
