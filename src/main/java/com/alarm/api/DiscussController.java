@@ -50,12 +50,13 @@ public class DiscussController {
 		
 		List<Discuss> discusses = discussService.selectAll(discuss_order_by, discuss_ascend, discuss_offset, discuss_page_size);
 	
-		for( Discuss descuss : discusses ){
+		for( Discuss discuss : discusses ){
 			JSONObject t = new JSONObject();
-			t.put("id", descuss.getId());
-			t.put("title", descuss.getTitle());
-			t.put("user_nickname", descuss.getUser().getNickname());
-			t.put("create_date", descuss.getCreateDate().getTime()/1000);
+			t.put("id", discuss.getId());
+			t.put("title", discuss.getTitle());
+			t.put("content", discuss.getContent());
+			t.put("user_nickname", discuss.getUser().getNickname());
+			t.put("create_date", discuss.getCreateDate().getTime()/1000);
 			temp.add(t);
 		}
 		
@@ -86,14 +87,15 @@ public class DiscussController {
 		JSONObject retval = new JSONObject();
 		JSONArray temp = new JSONArray();
 		
-		List<Discuss> discuss = discussService.selectByUser(discuss_user_id, discuss_order_by, discuss_ascend, discuss_offset, discuss_page_size);
+		List<Discuss> discusses = discussService.selectByUser(discuss_user_id, discuss_order_by, discuss_ascend, discuss_offset, discuss_page_size);
 	
-		for( Discuss d : discuss ){
+		for( Discuss discuss : discusses ){
 			JSONObject t = new JSONObject();
-			t.put("id", d.getId());
-			t.put("title", d.getTitle());
-			t.put("user_nickname", d.getUser().getNickname());
-			t.put("create_date", d.getCreateDate().getTime()/1000);
+			t.put("id", discuss.getId());
+			t.put("title", discuss.getTitle());
+			t.put("content", discuss.getContent());
+			t.put("user_nickname", discuss.getUser().getNickname());
+			t.put("create_date", discuss.getCreateDate().getTime()/1000);
 			temp.add(t);
 		}
 		
