@@ -259,7 +259,7 @@ public class UserController {
 			starArr.add(t);
 			if( star.getUser().getId() == user_id ){
 				userNo = i+1;
-				break;
+//				break;
 			}
 		}
 		
